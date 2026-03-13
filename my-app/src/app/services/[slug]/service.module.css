@@ -1,0 +1,111 @@
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1rem 4rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.heroText {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.kicker {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.title {
+  font-size: clamp(1.9rem, 4.2vw, 2.7rem);
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  opacity: 0.88;
+}
+
+.description {
+  line-height: 1.65;
+  max-width: 65ch;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  border: 1px solid color-mix(in srgb, var(--foreground) 22%, transparent);
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  font-weight: 600;
+}
+
+.primaryBtn {
+  background: var(--accent-strong);
+  color: #f8fbff;
+}
+
+.secondaryBtn {
+  background: color-mix(in srgb, var(--surface) 40%, var(--background));
+  color: var(--foreground);
+}
+
+.heroImage {
+  border: 1px solid color-mix(in srgb, var(--foreground) 15%, transparent);
+  border-radius: 14px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--foreground) 4%, var(--background));
+}
+
+.heroImage img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.card {
+  border: 1px solid color-mix(in srgb, var(--foreground) 15%, transparent);
+  border-radius: 12px;
+  padding: 1rem;
+  background: color-mix(in srgb, var(--surface) 70%, var(--background));
+}
+
+.card h2 {
+  margin-bottom: 0.65rem;
+  font-size: 1.15rem;
+}
+
+.card ul {
+  padding-left: 1.15rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

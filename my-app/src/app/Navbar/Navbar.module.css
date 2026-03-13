@@ -1,0 +1,113 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  background: color-mix(in srgb, var(--background) 78%, var(--surface));
+  border-bottom: 1px solid color-mix(in srgb, var(--foreground) 15%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.navbar {
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: var(--nav-height);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.logoLink {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  flex-shrink: 0;
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.navLinks a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--foreground);
+  transition: color 0.2s ease;
+}
+
+.navLinks a:hover {
+  color: var(--accent);
+}
+
+.menuButton {
+  display: none;
+  background: transparent;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+}
+
+.menuButton span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--foreground);
+  margin: 5px 0;
+}
+
+.mobileMenu {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .navLinks {
+    display: none;
+  }
+
+  .menuButton {
+    display: inline-block;
+  }
+
+  .mobileMenu {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+    border-top: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
+    background: color-mix(in srgb, var(--background) 82%, var(--surface));
+  }
+
+  .mobileMenuOpen {
+    max-height: 420px;
+  }
+
+  .mobileMenu ul {
+    list-style: none;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.75rem 1rem 1rem;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .mobileMenu a {
+    display: block;
+    padding: 0.35rem 0;
+    font-weight: 500;
+    color: var(--foreground);
+  }
+
+  .mobileMenu a:hover {
+    color: var(--accent);
+  }
+}
