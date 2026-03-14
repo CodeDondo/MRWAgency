@@ -3,6 +3,30 @@ import { Resend } from "resend";
 export const runtime = "nodejs";
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+const isContactConfigured = Boolean(process.env.RESEND_API_KEY);
+const toEmail = process.env.CONTACT_TO_EMAIL || "kontakt@mrwagency.dk";
+const fromEmail = process.env.CONTACT_FROM_EMAIL || "onboarding@resend.dev";
+
+if (!isContactConfigured) {
+  console.warn("[contact-api] Missing RESEND_API_KEY. Contact form emails are disabled.");
+}
+
+if (!process.env.CONTACT_FROM_EMAIL) {
+  console.warn("[contact-api] CONTACT_FROM_EMAIL is not set. Using onboarding@resend.dev.");
+}
+
+export async function GET() {
+  return Response.json({
+    success: true,
+    service: "contact",
+    configured: isContactConfigured,
+    checks: {
+      RESEND_API_KEY: isContactConfigured,
+      CONTACT_TO_EMAIL: Boolean(process.env.CONTACT_TO_EMAIL),
+      CONTACT_FROM_EMAIL: Boolean(process.env.CONTACT_FROM_EMAIL),
+    },
+  });
+}
 
 const sanitize = (value) => (typeof value === "string" ? value.trim() : "");
 
@@ -38,9 +62,6 @@ export async function POST(request) {
     if (!isValidEmail(email)) {
       return Response.json({ success: false, message: "Indtast en gyldig email-adresse." }, { status: 400 });
     }
-
-    const toEmail = process.env.CONTACT_TO_EMAIL || "kontakt@mrwagency.dk";
-    const fromEmail = process.env.CONTACT_FROM_EMAIL || "onboarding@resend.dev";
 
     if (!resend) {
       return Response.json(
