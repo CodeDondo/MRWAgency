@@ -13,8 +13,8 @@ export default function KontaktPage() {
       <p className={styles.meta}>Vi glæder os til at høre om dit projekt</p>
       <section className={styles.section}>
         <p>Email: kontakt@mrwagency.dk</p>
-        <p>Telefon: +45 12 34 56 78</p>
-        <p>CVR: 12345678</p>
+        <p>Telefon: +45 30 25 03 44</p>
+        <p>CVR: 44231662</p>
       </section>
 
       <section className={styles.section}>
