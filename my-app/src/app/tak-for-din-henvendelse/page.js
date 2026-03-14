@@ -15,7 +15,7 @@ export default function ThankYouPage() {
       <section className={styles.section}>
         <p>
           Du kan forvente svar på email fra <strong>kontakt@mrwagency.dk</strong>. Hvis din henvendelse haster,
-          kan du også ringe på +45 12 34 56 78.
+          kan du også ringe på +45 30 25 03 44.
         </p>
       </section>
 
