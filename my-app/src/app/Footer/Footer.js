@@ -29,6 +29,27 @@ const legalLinks = [
   { label: "Ansvarsfraskrivelse", href: "/ansvarsfraskrivelse" },
 ];
 
+const socialLinks = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/mrwagency/",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M7.5 2C4.467 2 2 4.467 2 7.5v9C2 19.533 4.467 22 7.5 22h9c3.033 0 5.5-2.467 5.5-5.5v-9C22 4.467 19.533 2 16.5 2h-9Zm0 2h9C18.43 4 20 5.57 20 7.5v9c0 1.93-1.57 3.5-3.5 3.5h-9C5.57 20 4 18.43 4 16.5v-9C4 5.57 5.57 4 7.5 4Zm9.25 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61582161611293",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M13.5 22v-8h2.6l.4-3h-3V9.1c0-.9.3-1.5 1.6-1.5h1.7V4.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.3V11H8v3h2.2v8h3.3Z" />
+      </svg>
+    ),
+  },
+];
+
 export default function Footer() {
   return (
     <footer className={styles.footer}>
@@ -49,6 +70,21 @@ export default function Footer() {
             <a href="mailto:kontakt@mrwagency.dk">Email: kontakt@mrwagency.dk</a>
             <a href="tel:+4530250344">Telefon: +45 30 25 03 44</a>
             <p>CVR: 44231662</p>
+          </div>
+          <div className={styles.socialLinks}>
+            {socialLinks.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                title={social.label}
+                className={styles.socialLink}
+              >
+                {social.icon}
+              </a>
+            ))}
           </div>
         </section>
 
