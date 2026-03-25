@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://mrwagency.dk"),
+  metadataBase: new URL("https://www.mrwagency.dk"),
   title: {
     default: "MRW Agency | Webdesign, websites og content creation",
     template: "%s | MRW Agency",
@@ -39,7 +39,7 @@ export const metadata = {
     title: "MRW Agency | Webdesign, websites og content creation",
     description:
       "Professionelle websites, branding og content creation til virksomheder, der vil stå stærkere digitalt.",
-    url: "https://mrwagency.dk",
+    url: "https://www.mrwagency.dk",
     siteName: "MRW Agency",
     locale: "da_DK",
     type: "website",
@@ -58,9 +58,6 @@ export const metadata = {
     description:
       "Professionelle websites, branding og content creation til virksomheder, der vil stå stærkere digitalt.",
     images: ["/webhero.jpg"],
-  },
-  alternates: {
-    canonical: "/",
   },
   icons: {
     icon: "/mrw_agency_logo_round.png",

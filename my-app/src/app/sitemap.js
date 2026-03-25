@@ -1,5 +1,5 @@
 const getBaseUrl = () => {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://mrwagency.dk";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.mrwagency.dk";
   return siteUrl.endsWith("/") ? siteUrl.slice(0, -1) : siteUrl;
 };
 
