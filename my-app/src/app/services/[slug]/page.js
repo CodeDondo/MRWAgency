@@ -131,6 +131,9 @@ export async function generateMetadata({ params }) {
   return {
     title: `${service.title} | MRW Agency`,
     description: service.description,
+    alternates: {
+      canonical: `/services/${slug}`,
+    },
   };
 }
 

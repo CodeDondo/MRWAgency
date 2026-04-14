@@ -64,6 +64,23 @@ export const metadata = {
     shortcut: "/mrw_agency_logo_round.png",
     apple: "/mrw_agency_logo_round.png",
   },
+  alternates: {
+    canonical: "https://www.mrwagency.dk",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+  },
 };
 
 export default function RootLayout({ children }) {
