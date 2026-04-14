@@ -169,6 +169,7 @@
 .card,
 .priceCard,
 .processCard,
+.partnerCard,
 .finalCta {
   border: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent);
   background: color-mix(in srgb, var(--surface) 70%, var(--background));
@@ -177,7 +178,8 @@
 
 .card,
 .priceCard,
-.processCard {
+.processCard,
+.partnerCard {
   padding: 1.4rem;
   transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease,
     background-color 0.24s ease;
@@ -237,6 +239,30 @@
   color: var(--accent);
   font-weight: 700;
   margin-bottom: 1rem;
+}
+
+.partnerGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.partnerCard {
+  max-width: 420px;
+}
+
+.partnerImageLink {
+  display: block;
+  width: 100%;
+}
+
+.partnerImage {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent);
+  background: color-mix(in srgb, var(--surface) 74%, var(--background));
 }
 
 .finalCta {
@@ -299,6 +325,7 @@
   .card:hover,
   .priceCard:hover,
   .processCard:hover,
+  .partnerCard:hover,
   .finalCta:hover {
     transform: translateY(-6px);
     border-color: color-mix(in srgb, var(--accent) 42%, transparent);

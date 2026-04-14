@@ -157,6 +157,34 @@ export default function Home() {
           </div>
         </section>
 
+        <section className={styles.section}>
+          <div className={styles.sectionHeading}>
+            <p className={styles.kicker}>Samarbejde</p>
+            <h2>Virksomheder vi har arbejdet sammen med</h2>
+            <p>Et af vores tidligere samarbejder er Salon Jozi, hvor vi har bidraget til deres digitale tilstedeværelse.</p>
+          </div>
+
+          <div className={styles.partnerGrid}>
+            <article className={styles.partnerCard}>
+              <a
+                href="https://www.salonjozi.dk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.partnerImageLink}
+                aria-label="Besøg Salon Jozi"
+              >
+                <Image
+                  src="/salonJozi.png"
+                  alt="Salon Jozi"
+                  width={420}
+                  height={220}
+                  className={styles.partnerImage}
+                />
+              </a>
+            </article>
+          </div>
+        </section>
+
         <section className={styles.finalCta}>
           <div>
             <p className={styles.kicker}>Klar til næste skridt?</p>
