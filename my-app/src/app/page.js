@@ -182,6 +182,23 @@ export default function Home() {
                 />
               </a>
             </article>
+            <article className={styles.partnerCard}>
+              <a
+                href="https://www.creatorsimod.dk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.partnerImageLink}
+                aria-label="Besøg Creators i Mod"
+              >
+                <Image
+                  src="/creatorsImod.png"
+                  alt="Creators i Mod"
+                  width={420}
+                  height={220}
+                  className={styles.partnerImage}
+                />
+              </a>
+            </article>
           </div>
         </section>
 

@@ -21,6 +21,12 @@ const projects = [
     preview: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fxn--nordjyskkreskole-txb.dk?w=1200",
     summary: "Informationsrigt website med fokus på overblik, lokale kunder og en professionel digital profil.",
   },
+  {
+    name: "creatorsimod.dk",
+    url: "https://creatorsimod.dk",
+    preview: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fcreatorsimod.dk?w=1200",
+    summary: "Website for Creators i Mod med fokus på kreativt indhold og synlighed online.",
+  },
 ];
 
 export const metadata = {
