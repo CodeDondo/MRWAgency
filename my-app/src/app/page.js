@@ -161,7 +161,7 @@ export default function Home() {
           <div className={styles.sectionHeading}>
             <p className={styles.kicker}>Samarbejde</p>
             <h2>Virksomheder vi har arbejdet sammen med</h2>
-            <p>Et af vores tidligere samarbejder er Salon Jozi, hvor vi har bidraget til deres digitale tilstedeværelse.</p>
+            <p>Vores tidligere samarbejder, hvor vi har bidraget til deres digitale tilstedeværelse.</p>
           </div>
 
           <div className={styles.partnerGrid}>
