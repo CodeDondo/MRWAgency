@@ -3,12 +3,6 @@ import styles from "./portfolio.module.css";
 
 const projects = [
   {
-    name: "3dmanden.dk",
-    url: "https://3dmanden.dk",
-    preview: "https://s.wordpress.com/mshots/v1/https%3A%2F%2F3dmanden.dk?w=1200",
-    summary: "Website med fokus på tydelig præsentation af ydelser, troværdighed og en enkel brugerrejse.",
-  },
-  {
     name: "salonjozi.dk",
     url: "https://salonjozi.dk",
     preview: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fsalonjozi.dk?w=1200",
