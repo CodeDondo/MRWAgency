@@ -14,6 +14,7 @@ export default function sitemap() {
     { path: "/priser", changeFrequency: "weekly", priority: 0.9 },
     { path: "/book-et-moede", changeFrequency: "weekly", priority: 0.9 },
     { path: "/kontakt", changeFrequency: "weekly", priority: 0.8 },
+    { path: "/sporgeskema", changeFrequency: "weekly", priority: 0.75 },
     { path: "/content-creation", changeFrequency: "weekly", priority: 0.85 },
     { path: "/faq", changeFrequency: "monthly", priority: 0.6 },
     { path: "/cookiepolitik", changeFrequency: "yearly", priority: 0.4 },

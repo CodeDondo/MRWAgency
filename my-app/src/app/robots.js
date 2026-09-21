@@ -11,7 +11,7 @@ export default function robots() {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/tak-for-din-henvendelse"],
+        disallow: ["/api/", "/tak-for-din-henvendelse", "/tak-for-din-henvendelse/"],
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
