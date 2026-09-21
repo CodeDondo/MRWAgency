@@ -7,27 +7,42 @@ export const metadata = {
   description: "Mød personen bag MRW Agency og læs om erfaring, tilgang og udviklingen fra service til webløsninger.",
 };
 
+const birthDate = new Date("1996-01-18T00:00:00");
+const today = new Date();
+const age = today.getFullYear() - birthDate.getFullYear();
+const hasBirthdayPassedThisYear =
+  today.getMonth() > birthDate.getMonth() ||
+  (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
+const currentAge = hasBirthdayPassedThisYear ? age : age - 1;
+
 export default function OmOsPage() {
   return (
     <main className={styles.wrapper}>
       <section className={styles.hero}>
         <div className={styles.heroText}>
           <p className={styles.kicker}>Om MRW Agency</p>
-          <h1>Fra stærk kundekontakt til målrettede B2B-webløsninger</h1>
+          <h1>Frontendudvikler, selvstændig partner og kreativ digital udvikler</h1>
           <p>
-            Jeg hedder Morten, er 30 år og uddannet webudvikler. I mit daglige arbejde som bartender har jeg
-            lært, hvor meget god service, tydelig kommunikation og relationer betyder for en stærk
-            kundeoplevelse. Den tilgang tager jeg direkte med ind i mit arbejde med websites.
+            Jeg hedder Morten, er {currentAge} år og arbejder som selvstændig frontend developer med fokus på
+            moderne, brugervenlige og resultatorienterede digitale løsninger. Sideløbende arbejder jeg som
+            salgsassistent, hvilket har styrket min evne til at forstå kunder, skabe tillid og oversætte behov
+            til konkrete løsninger.
           </p>
           <p>
-            Med MRW Agency hjælper jeg virksomheder med professionelle, brugervenlige og skalerbare
-            webløsninger. Mit mål er at levere løsninger, der både ser skarpe ud, performer teknisk og skaber
-            reel forretningsværdi.
+            Min baggrund ligger i både teknisk udvikling og serviceorienteret kommunikation. Jeg har været
+            content creator siden 2012, og det har givet mig en stærk forståelse for visuel kommunikation,
+            branding og hvordan stærkt indhold skaber engagement og genkendelighed. Det gør mig i stand til at
+            kombinere teknisk kvalitet med en klar, professionel og målrettet digital strategi.
+          </p>
+          <p>
+            Jeg har et naturligt fokus på struktur, præcision og kvalitet i alt jeg bygger. Med MRW Agency
+            skaber jeg digitale løsninger, der er ikke blot flotte at se på, men også stærke i praksis: hurtige,
+            brugervenlige, teknisk robuste og bygget til at kunne udvikle sig med virksomheden.
           </p>
         </div>
 
         <div className={styles.heroImageWrap}>
-          <Image src="/mig.jpg" alt="Morten fra MRW Agency" width={640} height={800} className={styles.heroImage} />
+          <Image src="/mig.png" alt="Morten fra MRW Agency" width={640} height={800} className={styles.heroImage} />
         </div>
       </section>
 

@@ -1,10 +1,10 @@
 .page {
   --text-primary: var(--foreground);
-  --text-secondary: color-mix(in srgb, var(--foreground) 72%, transparent);
+  --text-secondary: var(--muted);
 
-  --button-primary-hover: var(--accent);
-  --button-secondary-hover: color-mix(in srgb, var(--surface) 70%, var(--background));
-  --button-secondary-border: color-mix(in srgb, var(--accent) 42%, transparent);
+  --button-primary-hover: var(--accent-strong);
+  --button-secondary-hover: var(--accent-soft);
+  --button-secondary-border: var(--border);
 
   display: flex;
   min-height: 100vh;
@@ -18,7 +18,23 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3rem 1rem 5rem;
+  padding: 2rem 1rem 5rem;
+}
+
+.topBannerWrap {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06);
+}
+
+.topBanner {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
 }
 
 .hero {
@@ -171,8 +187,8 @@
 .processCard,
 .partnerCard,
 .finalCta {
-  border: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent);
-  background: color-mix(in srgb, var(--surface) 70%, var(--background));
+  border: 1px solid var(--border);
+  background: var(--surface);
   border-radius: 20px;
 }
 
@@ -241,16 +257,26 @@
   margin-bottom: 1rem;
 }
 
-.partnerGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-  align-items: stretch;
+.partnerMarquee {
+  overflow: hidden;
+  position: relative;
+  padding-block: 0.25rem;
 }
 
-.partnerCard {
-  max-width: none;
-  width: 100%;
+.partnerTrack {
+  display: flex;
+  width: max-content;
+  gap: 1rem;
+  animation: partnerScroll 22s linear infinite;
+}
+
+.partnerSlide {
+  flex: 0 0 360px;
+  max-width: 360px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  transition: transform 0.24s ease, opacity 0.24s ease;
 }
 
 .partnerImageLink {
@@ -260,6 +286,8 @@
   width: 100%;
   height: 160px;
   padding: 0.75rem;
+  background: transparent;
+  border: none;
 }
 
 .partnerImage {
@@ -267,9 +295,18 @@
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  border-radius: 14px;
-  border: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent);
-  background: color-mix(in srgb, var(--surface) 74%, var(--background));
+  border-radius: 0;
+  border: none;
+  background: transparent;
+}
+
+@keyframes partnerScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .finalCta {
@@ -278,6 +315,7 @@
   justify-content: space-between;
   gap: 1.25rem;
   padding: 1.6rem;
+  background: linear-gradient(135deg, #ffffff 0%, #edf3ff 100%);
   transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
 }
 
@@ -332,7 +370,7 @@
   .card:hover,
   .priceCard:hover,
   .processCard:hover,
-  .partnerCard:hover,
+  .partnerSlide:hover,
   .finalCta:hover {
     transform: translateY(-6px);
     border-color: color-mix(in srgb, var(--accent) 42%, transparent);
@@ -378,9 +416,13 @@
   .cardGrid,
   .pricingPreview,
   .processGrid,
-  .partnerGrid,
   .finalCta {
     grid-template-columns: 1fr;
+  }
+
+  .partnerSlide {
+    flex-basis: 280px;
+    max-width: 280px;
   }
 
   .heroTitle {

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./portfolio.module.css";
 
-const projects = [
+const websiteProjects = [
   {
     name: "salonjozi.dk",
     url: "https://salonjozi.dk",
@@ -23,6 +23,13 @@ const projects = [
   },
 ];
 
+const ugcProject = {
+  name: "UGC arbejde",
+  url: "https://drive.google.com/drive/folders/1SWMxYUNfVIaqOUQqnl_elAZTVUWTORUo?usp=drive_link",
+  tag: "Video portfolio",
+  summary: "Udvalgt UGC-indhold med naturlig, stærk og autentisk storytelling til sociale medier og brandarbejde.",
+};
+
 export const metadata = {
   title: "Portfolio | MRW Agency",
   description: "Udvalgte websites bygget af MRW Agency med fokus på design, performance og konvertering.",
@@ -41,7 +48,7 @@ export default function PortfolioPage() {
       </section>
 
       <section className={styles.grid}>
-        {projects.map((project) => (
+        {websiteProjects.map((project) => (
           <article key={project.name} className={styles.card}>
             <div className={styles.previewWrap}>
               <div className={styles.browserBar}>
@@ -62,6 +69,24 @@ export default function PortfolioPage() {
             </div>
           </article>
         ))}
+      </section>
+
+      <section className={styles.ugcSection}>
+        <div className={styles.ugcHeader}>
+          <p className={styles.kicker}>UGC arbejde</p>
+          <h2>Se mit UGC-arbejde</h2>
+        </div>
+
+        <article className={`${styles.card} ${styles.ugcCard}`}>
+          <div className={styles.ugcCardInner}>
+            <span className={styles.ugcBadge}>{ugcProject.tag}</span>
+            <h3>Authentic content med reel værdi</h3>
+            <p>{ugcProject.summary}</p>
+            <Link href={ugcProject.url} target="_blank" rel="noopener noreferrer" className={styles.cta}>
+              Se UGC-videoer
+            </Link>
+          </div>
+        </article>
       </section>
     </main>
   );

@@ -33,28 +33,29 @@ const packages = [
     featured: true,
   },
   {
-    name: "Website + SoMe Content",
-    price: "12.000 – 20.000 kr",
-    intro: "For virksomheder der vil kombinere website og content i én samlet løsning.",
+    name: "Website + UGC / SoMe Content",
+    price: "14.000 – 22.000 kr",
+    intro: "For virksomheder der vil kombinere en stærk hjemmeside med autentisk content, der skaber synlighed og engagement.",
     features: [
       "Business website",
       "Opsætning af SoMe profiler",
-      "10 SoMe posts",
-      "5 short form videoer (Reels / TikTok)",
+      "12 SoMe posts",
+      "4–6 short form videoer (Reels / TikTok / Stories)",
       "Content plan for 30 dage",
+      "Klip / tilpasning til flere platforme",
     ],
     extras: ["Velegnet når du vil stå stærkt både på website og sociale medier"],
   },
   {
-    name: "Monthly Marketing",
-    price: "3.000 – 8.000 kr / måned",
-    intro: "En månedlig løsning til virksomheder der vil holde sig aktive og synlige løbende.",
+    name: "UGC / SoMe drift",
+    price: "2.500 – 7.000 kr / måned",
+    intro: "En løbende løsning til virksomheder, der vil være synlige og konsekvente online uden at skulle stå alene med indholdet.",
     features: [
       "8–12 SoMe posts",
       "4 short form videoer",
-      "Content plan",
+      "Content plan og koncept",
       "Analytics rapport",
-      "Mindre website updates",
+      "Mindre kreative justeringer og ideer til kampagner",
     ],
     extras: ["Kan skaleres efter hvor meget indhold og support du ønsker hver måned"],
   },
@@ -62,9 +63,10 @@ const packages = [
 
 const addOns = [
   { name: "Logo design", price: "1.000 – 3.000 kr" },
-  { name: "SEO pakke", price: "3.000 – 6.000 kr" },
+  { name: "SEO pakke", price: "2.500 – 5.000 kr" },
   { name: "Google Ads setup", price: "2.000 – 4.000 kr" },
-  { name: "Ekstra video content", price: "500 – 1.000 kr pr. video" },
+  { name: "Ekstra UGC video", price: "750 – 1.500 kr pr. video" },
+  { name: "SoMe content plan", price: "1.500 – 3.000 kr" },
 ];
 
 const maintenancePlans = [

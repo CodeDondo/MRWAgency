@@ -82,6 +82,61 @@
   transition: transform 0.35s ease;
 }
 
+.ugcSection {
+  display: grid;
+  gap: 1rem;
+}
+
+.ugcHeader {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.ugcHeader h2 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1.1;
+}
+
+.ugcCard {
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  background: linear-gradient(135deg, rgba(12, 18, 32, 0.98), rgba(18, 26, 43, 0.96));
+}
+
+.ugcCardInner {
+  padding: 1.5rem;
+  display: grid;
+  gap: 1rem;
+  color: #edf4ff;
+}
+
+.ugcBadge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(96, 126, 255, 0.18);
+  border: 1px solid rgba(166, 184, 255, 0.35);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #edf4ff;
+}
+
+.ugcCardInner h3 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  line-height: 1.1;
+  color: #f8fbff;
+}
+
+.ugcCardInner p {
+  margin: 0;
+  color: rgba(237, 244, 255, 0.8);
+  line-height: 1.7;
+}
+
 .cardBody {
   padding: 1rem;
   display: grid;

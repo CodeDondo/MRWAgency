@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import LeadQuiz from "./components/LeadQuiz/LeadQuiz";
 import styles from "./page.module.css";
 
 export const metadata = {
@@ -20,10 +21,42 @@ export const metadata = {
   },
 };
 
+const partnerBrands = [
+  {
+    name: "Salon Jozi",
+    href: "https://www.salonjozi.dk",
+    src: "/salonJozi.png",
+    alt: "Salon Jozi",
+  },
+  {
+    name: "Creators i Mod",
+    href: "https://www.creatorsimod.dk",
+    src: "/creatorsImod.png",
+    alt: "Creators i Mod",
+  },
+  {
+    name: "Nordic Retro",
+    href: "https://www.nordiccretro.dk",
+    src: "/nordicRetro.png",
+    alt: "Nordic Retro",
+  },
+];
+
 export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        <div className={styles.topBannerWrap}>
+          <Image
+            src="/heroBanner.png"
+            alt="MRW Agency banner"
+            width={1600}
+            height={300}
+            priority
+            className={styles.topBanner}
+          />
+        </div>
+
         <section className={styles.hero}>
           <div className={styles.heroContent}>
             <p className={styles.kicker}>MRW Agency</p>
@@ -36,9 +69,6 @@ export default function Home() {
             <div className={styles.ctas}>
               <Link href="/book-et-moede" className={styles.primary}>
                 Book et møde
-              </Link>
-              <Link href="/priser" className={styles.secondary}>
-                Se priser
               </Link>
             </div>
 
@@ -94,42 +124,10 @@ export default function Home() {
               <p>Teknisk SEO og struktur der hjælper dig med at blive fundet af de rigtige kunder.</p>
             </article>
             <article className={styles.card}>
-              <h3>SoMe content</h3>
-              <p>Indhold til sociale medier, der gør det lettere at være synlig og konsekvent online.</p>
+              <h3>UGC / SoMe content</h3>
+              <p>Authentisk indhold til sociale medier, som gør det lettere at skabe synlighed, engagement og bekendtskab.</p>
             </article>
           </div>
-        </section>
-
-        <section className={styles.section}>
-          <div className={styles.sectionHeading}>
-            <p className={styles.kicker}>Pakker</p>
-            <h2>En prisstruktur der er nem at forstå</h2>
-            <p>Du kan starte enkelt og skalere op, når din virksomhed vokser.</p>
-          </div>
-
-          <div className={styles.pricingPreview}>
-            <article className={styles.priceCard}>
-              <span className={styles.priceLabel}>Starter Website</span>
-              <h3>4.000 – 7.000 kr</h3>
-              <p>Perfekt til mindre virksomheder der vil have en stærk og professionel start online.</p>
-            </article>
-
-            <article className={`${styles.priceCard} ${styles.featuredCard}`}>
-              <span className={styles.priceLabel}>Business Website</span>
-              <h3>8.000 – 15.000 kr</h3>
-              <p>En komplet løsning med branding, SEO og plads til at positionere din virksomhed stærkere.</p>
-            </article>
-
-            <article className={styles.priceCard}>
-              <span className={styles.priceLabel}>Website + SoMe Content</span>
-              <h3>12.000 – 20.000 kr</h3>
-              <p>Kombinér website og content, så du både ser skarp ud og forbliver aktiv på sociale medier.</p>
-            </article>
-          </div>
-
-          <Link href="/priser" className={styles.inlineLink}>
-            Se alle pakker, add-ons og vedligeholdelsesplaner
-          </Link>
         </section>
 
         <section className={styles.processSection}>
@@ -159,46 +157,46 @@ export default function Home() {
 
         <section className={styles.section}>
           <div className={styles.sectionHeading}>
+            <p className={styles.kicker}>Få mit forslag</p>
+            <h2>Bliv matchet med den rigtige løsning til din virksomhed</h2>
+            <p>
+              Svar på kortet om din virksomhed, dit behov og dit budget, så får du et konkret forslag til,
+              hvad der vil være mest værdiskabende for dig.
+            </p>
+          </div>
+
+          <LeadQuiz />
+        </section>
+
+        <section className={styles.section}>
+          <div className={styles.sectionHeading}>
             <p className={styles.kicker}>Samarbejde</p>
             <h2>Virksomheder vi har arbejdet sammen med</h2>
             <p>Vores tidligere samarbejder, hvor vi har bidraget til deres digitale tilstedeværelse.</p>
           </div>
 
-          <div className={styles.partnerGrid}>
-            <article className={styles.partnerCard}>
-              <a
-                href="https://www.salonjozi.dk"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.partnerImageLink}
-                aria-label="Besøg Salon Jozi"
-              >
-                <Image
-                  src="/salonJozi.png"
-                  alt="Salon Jozi"
-                  width={420}
-                  height={220}
-                  className={styles.partnerImage}
-                />
-              </a>
-            </article>
-            <article className={styles.partnerCard}>
-              <a
-                href="https://www.creatorsimod.dk"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.partnerImageLink}
-                aria-label="Besøg Creators i Mod"
-              >
-                <Image
-                  src="/creatorsImod.png"
-                  alt="Creators i Mod"
-                  width={420}
-                  height={220}
-                  className={styles.partnerImage}
-                />
-              </a>
-            </article>
+          <div className={styles.partnerMarquee} aria-label="Samarbejds partnere carousel">
+            <div className={styles.partnerTrack}>
+              {[...partnerBrands, ...partnerBrands].map((brand, index) => (
+                <article key={`${brand.name}-${index}`} className={styles.partnerSlide}>
+                  <a
+                    href={brand.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.partnerImageLink}
+                    aria-label={`Besøg ${brand.name}`}
+                  >
+                    <Image
+                      src={brand.src}
+                      alt={brand.alt}
+                      width={420}
+                      height={220}
+                      className={styles.partnerImage}
+                    />
+                  </a>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 

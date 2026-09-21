@@ -3,57 +3,57 @@ import styles from "./content-creation.module.css";
 
 const valuePoints = [
   {
-    title: "Skift fra betalte leads til organisk efterspørgsel",
-    text: "Byg en kanal, der skaber opmærksomhed, tillid og trafik uden at være afhængig af annoncer i hver eneste fase.",
+    title: "Mere synlighed uden at blive mere salgsagtig",
+    text: "Indholdet skal gøre virksomheden lettere at genkende, forstå og vælge – uden at virke overdrevent markedsføringsagtigt.",
   },
   {
-    title: "Bliv mere personlig og mere troværdig",
-    text: "Vis mennesket bag virksomheden gennem content, der føles ægte og gør det lettere for kunder at vælge dig.",
+    title: "Styrk troværdighed og brandprofil",
+    text: "Konsistent, autentisk content skaber mere tillid og en stærkere oplevelse af, hvem virksomheden er og hvad den står for.",
   },
   {
-    title: "Lær selv at producere content på sigt",
-    text: "Start med MRW Agency som content-partner, og opbyg derefter intern viden, rutiner og tryghed til selv at fortsætte.",
+    title: "Skab en bedre content-rutine",
+    text: "Jeg bygger løsninger, der gør det nemmere at producere indhold regelmæssigt og professionelt over tid.",
   },
 ];
 
 const offerings = [
   {
-    title: "UGC og content til andre virksomheder",
-    text: "Content der er lavet til at føles naturligt, relevant og konverterende på sociale medier og i kampagner.",
+    title: "UGC og short-form video",
+    text: "Naturligt, personligt indhold til sociale medier, der føles autentisk og kan bruges som et stærkt brandværktøj.",
   },
   {
-    title: "Organisk markedsføring",
-    text: "Strategisk content, der bygger relationer over tid og flytter fokus fra hurtige leads til stærkere brandværdi.",
+    title: "Organisk brandarbejde",
+    text: "Strategisk indhold, der styrker virksomhedens tone of voice, relationer og online tilstedeværelse over tid.",
   },
   {
-    title: "Træning og overdragelse",
-    text: "Et setup hvor virksomheden gradvist lærer at lave content selv, mens jeg hjælper med struktur, format og kvalitet.",
+    title: "Content-struktur og support",
+    text: "Et system, der gør det muligt at skabe løsninger mere effektivt, med tydelig retning og bedre kvalitet på tværs af kampagner.",
   },
 ];
 
 const processSteps = [
   {
     step: "01",
-    title: "Strategisk afsæt",
-    text: "Vi afklarer målgruppen, tone of voice, content-vinkler og hvordan brandet skal fremstå mere personligt.",
+    title: "Klar retning",
+    text: "Vi fastlægger mål, målgruppe, tone og de emner, der faktisk skaber relevans for virksomheden.",
   },
   {
     step: "02",
-    title: "UGC og produktion",
-    text: "Jeg producerer content til virksomheden med fokus på et naturligt udtryk, klar retning og reel brugsværdi.",
+    title: "Indhold og produktion",
+    text: "Jeg skaber indhold, der er brugbart, visuelt stærkt og bygget til at fremstå troværdigt og engagerende.",
   },
   {
     step: "03",
-    title: "Læring og skalering",
-    text: "Når fundamentet virker, hjælper jeg med at gøre processen mere intern, så virksomheden selv kan fortsætte.",
+    title: "Forløb og optimering",
+    text: "Vi vurderer løbende, hvad der virker, og forbedrer indholdet så processen bliver mere effektiv og målrettet.",
   },
 ];
 
 const examples = [
-  "UGC-videoer, der føles som en anbefaling i stedet for en reklame",
-  "Organiske opslag og short-form content med personlig vinkel",
-  "Indhold til virksomheder, der vil være synlige uden at virke salgsagtige",
-  "Content-systemer, der senere kan overtages af teamet internt",
+  "Kortform video med naturlig, professionel og tæt på livet tone",
+  "Content, der styrker brandets identitet og skaber genkendelighed",
+  "Strategisk indhold til virksomheder, der vil være synlige uden at virke forceret",
+  "Et mere struktureret og konsekvent indholdsfokus, der kan bygges videre på",
 ];
 
 export const metadata = {
@@ -68,24 +68,16 @@ export default function ContentCreationPage() {
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <p className={styles.kicker}>UGC og organisk markedsføring</p>
-          <h1>Content der gør virksomheden mere personlig, mere synlig og mindre afhængig af betalte leads</h1>
+          <h1>Content, der gør virksomheden mere troværdig, mere synlig og mere relevant</h1>
           <p className={styles.heroText}>
-            MRW Agency hjælper virksomheder med content creation, der er bygget til at føles menneskeligt og
-            relevant. Målet er ikke bare flere opslag, men en stærkere og mere troværdig tilstedeværelse, hvor
-            målgruppen mærker personen bag brandet.
+            MRW Agency hjælper virksomheder med content creation, der skaber mere engagement og bedre
+            genkendelighed uden at miste kvaliteten eller professionaliteten. Her handler det om at gøre brandet
+            mere menneskeligt, mere troværdigt og mere attraktivt for den rigtige målgruppe.
           </p>
 
           <div className={styles.ctas}>
             <Link href="/book-et-moede" className={styles.primary}>
               Book en snak
-            </Link>
-            <Link
-              href="https://www.mortenrwinther.dk/mediepakker"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.secondary}
-            >
-              Læs om UGC mediepakker
             </Link>
           </div>
 
@@ -107,11 +99,11 @@ export default function ContentCreationPage() {
 
         <aside className={styles.heroPanel}>
           <p className={styles.panelKicker}>Hvad siden her handler om</p>
-          <h2>En løsning til virksomheder, der vil væk fra klassisk lead-jagt</h2>
+          <h2>Et mere bevidst og professionelt tilgang til content</h2>
           <p>
-            Hvis din virksomhed vil fremstå mere personlig, mere autentisk og mere attraktiv organisk, er det
-            contenten, der skal bære det. Her arbejder jeg med UGC-prægede formater, content til andre
-            virksomheder og en proces, hvor I også lærer at gøre det selv senere.
+            Hvis din virksomhed vil blive mere synlig og mere stærk i sit brand, skal contenten ikke bare være
+            hyppig – den skal være målrettet, troværdig og skabt med forståelse for både virksomhedens identitet
+            og målgruppen. Her arbejder jeg med indhold, der er naturligt, strategisk og brugbart i praksis.
           </p>
 
           <div className={styles.panelList}>
@@ -129,9 +121,9 @@ export default function ContentCreationPage() {
         <div className={styles.sectionHeading}>
           <h2>Hvad organisk content kan gøre for dig</h2>
           <p>
-            Den rigtige organiske indsats kan ændre måden, folk møder din virksomhed på. Du bliver mere
-            genkendelig, mere tillidsvækkende og langt lettere at vælge end et brand, der kun råber gennem
-            betalte annoncer.
+            Det handler ikke kun om at få flere opslag. Det handler om at skabe en stærkere oplevelse af dine
+            produkter, din virksomhed og den værdi, du leverer. Når contenten er tydelig og troværdig, bliver det
+            lettere at genkende, forstå og vælge dig.
           </p>
         </div>
 
@@ -149,8 +141,9 @@ export default function ContentCreationPage() {
         <div className={styles.sectionHeading}>
           <h2>Det jeg leverer som content partner</h2>
           <p>
-            MRW Agency kan stå inde for content til andre virksomheder, og løsningen kan både være en ren
-            produktion eller et længere forløb, hvor vi bygger jeres interne kompetencer op undervejs.
+            Jeg skaber indhold til virksomheder, der ønsker at stå stærkere online uden at miste deres
+            autenticitet. Det kan være en enkelt løsning eller et længere forløb, hvor vi bygger en mere stabil og
+            effektiv content-rutine sammen.
           </p>
         </div>
 
@@ -168,8 +161,8 @@ export default function ContentCreationPage() {
         <div className={styles.sectionHeading}>
           <h2>Sådan arbejder jeg med content i praksis</h2>
           <p>
-            Processen er lavet til virksomheder, der ønsker en klar retning, en mere personlig kommunikation og
-            en realistisk vej til selv at kunne overtage produktionen senere.
+            Processen er bygget til virksomheder, der vil have en tydeligere strategi, mere konsekvent indhold og
+            en mere professionel måde at arbejde med content på – både nu og fremover.
           </p>
         </div>
 
@@ -186,10 +179,10 @@ export default function ContentCreationPage() {
 
       <section className={styles.section}>
         <div className={styles.sectionHeading}>
-          <h2>UGC mediepakker og videre retning</h2>
+          <h2>En løsning, der kan udvikle sig med virksomheden</h2>
           <p>
-            Hvis du vil se min mere personlige tilgang til UGC mediepakker, kan du læse mere på min side for
-            det arbejde. Her på MRW Agency-siden er fokus på den kommercielle løsning til virksomheder.
+            Uanset om du vil starte med en enkel content-løsning eller opbygge en mere langsigtet strategi, kan
+            vi skabe et setup, der er realistisk, professionelt og bygget til at kunne skaleres.
           </p>
         </div>
 
@@ -216,8 +209,8 @@ export default function ContentCreationPage() {
         <div>
           <h2>Vil du have content, der føles mere ægte?</h2>
           <p>
-            Så lad os bygge en løsning, hvor din virksomhed bliver mere personlig, mere synlig og bedre til at
-            skabe relationer organisk.
+            Så lad os bygge en løsning, hvor din virksomhed bliver mere tydelig, mere troværdig og bedre til at
+            skabe relationer, der faktisk betyder noget.
           </p>
         </div>
         <Link href="/book-et-moede" className={styles.ctaButton}>

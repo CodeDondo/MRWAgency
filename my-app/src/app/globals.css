@@ -1,10 +1,13 @@
 :root {
-  --background: #081a3a;
-  --surface: #112a57;
-  --foreground: #eaf1ff;
-  --accent: #7fb0ff;
-  --accent-strong: #4f8dff;
+  --background: #f5f7fb;
+  --surface: #ffffff;
+  --foreground: #111827;
+  --muted: #4b5563;
+  --accent: #1d4ed8;
+  --accent-strong: #153aaf;
+  --accent-soft: rgba(29, 78, 216, 0.08);
   --nav-height: 80px;
+  --border: rgba(17, 24, 39, 0.1);
 }
 
 html,
@@ -20,6 +23,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding-top: var(--nav-height);
+  line-height: 1.6;
 }
 
 * {
@@ -37,6 +41,11 @@ a:hover {
   color: var(--accent-strong);
 }
 
+img {
+  max-width: 100%;
+  display: block;
+}
+
 html {
-  color-scheme: dark;
+  color-scheme: light;
 }
