@@ -100,7 +100,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className={styles.section}>
+        <section className={`${styles.section} ${styles.quizSection}`}>
           <div className={styles.sectionHeading}>
             <p className={styles.kicker}>Ydelser</p>
             <h2>Det kan vi hjælpe dig med</h2>

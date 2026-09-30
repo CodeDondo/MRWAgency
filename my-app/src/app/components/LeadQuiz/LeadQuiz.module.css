@@ -1,32 +1,34 @@
 .page {
   width: 100%;
+  max-width: 960px;
+  margin-inline: auto;
 }
 
 .card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 28px;
-  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.06);
+  background: linear-gradient(145deg, #ffffff 0%, #f4f8ff 100%);
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, white);
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(23, 48, 91, 0.1);
   overflow: hidden;
 }
 
 .progressWrap {
-  padding: 1.25rem 1.25rem 0;
+  padding: 1.5rem 1.75rem 0;
 }
 
 .progressBar {
   width: 100%;
-  height: 8px;
+  height: 10px;
   border-radius: 999px;
-  background: rgba(17, 24, 39, 0.06);
+  background: color-mix(in srgb, var(--accent) 10%, white);
   overflow: hidden;
 }
 
 .progressFill {
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-strong) 100%);
-  transition: width 0.2s ease;
+  background: linear-gradient(90deg, #20a886 0%, var(--accent) 100%);
+  transition: width 0.35s ease;
 }
 
 .stepInfo {
@@ -34,13 +36,15 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
+  font-weight: 600;
   color: var(--muted);
-  padding: 1rem 1.25rem 0;
+  padding: 0.85rem 1.75rem 0;
 }
 
 .content {
-  padding: 2rem 1.25rem 1.5rem;
+  min-height: 330px;
+  padding: 2rem 1.75rem 1.75rem;
 }
 
 .intro {
@@ -49,9 +53,10 @@
 }
 
 .eyebrow {
+  margin-bottom: 1rem;
   font-size: 0.82rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   color: var(--accent);
   text-transform: uppercase;
 }
@@ -59,12 +64,13 @@
 .title,
 .subtitle {
   line-height: 1.08;
-  letter-spacing: -0.05em;
   color: var(--foreground);
 }
 
 .title {
-  font-size: clamp(2rem, 4vw, 3rem);
+  max-width: 20ch;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.12;
 }
 
 .subtitle {
@@ -78,22 +84,26 @@
 }
 
 .description {
+  max-width: 42ch;
   color: var(--muted);
   font-size: 1.02rem;
+  line-height: 1.7;
 }
 
 .options {
   display: grid;
-  gap: 0.9rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
 }
 
 .optionButton {
   width: 100%;
-  border: 1px solid var(--border);
-  background: var(--surface);
+  min-height: 64px;
+  border: 1px solid color-mix(in srgb, var(--foreground) 12%, white);
+  background: rgba(255, 255, 255, 0.88);
   color: var(--foreground);
-  border-radius: 16px;
-  padding: 1rem 1.1rem;
+  border-radius: 12px;
+  padding: 0.95rem 1rem;
   font: inherit;
   font-size: 1rem;
   text-align: left;
@@ -103,14 +113,21 @@
 
 .optionButton:hover {
   transform: translateY(-1px);
-  border-color: rgba(29, 78, 216, 0.35);
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+  border-color: color-mix(in srgb, var(--accent) 55%, white);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
 }
 
 .optionButtonSelected {
-  border-color: rgba(29, 78, 216, 0.5);
-  background: rgba(29, 78, 216, 0.05);
-  box-shadow: inset 0 0 0 1px rgba(29, 78, 216, 0.2);
+  border-color: color-mix(in srgb, var(--accent) 62%, white);
+  background: color-mix(in srgb, var(--accent) 7%, white);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.optionButton:focus-visible,
+.backButton:focus-visible,
+.nextButton:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  outline-offset: 3px;
 }
 
 .contactGrid {
@@ -160,16 +177,15 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  padding: 1.5rem 1.25rem 1.75rem;
-  border-top: 1px solid var(--border);
-  background: rgba(148, 163, 184, 0.03);
+  padding: 1.25rem 1.75rem 1.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--accent) 12%, white);
+  background: rgba(255, 255, 255, 0.55);
 }
 
 .backButton,
-.nextButton,
-.submitButton {
+.nextButton {
   border: none;
-  border-radius: 999px;
+  border-radius: 10px;
   font: inherit;
   font-weight: 700;
   cursor: pointer;
@@ -178,27 +194,24 @@
 
 .backButton {
   background: transparent;
-  color: var(--foreground);
-  padding: 0.8rem 1.15rem;
+  color: var(--muted);
+  padding: 0.8rem 0.5rem;
 }
 
-.nextButton,
-.submitButton {
-  background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+.nextButton {
+  background: linear-gradient(135deg, #168b70, var(--accent));
   color: #ffffff;
-  padding: 0.9rem 1.5rem;
-  box-shadow: 0 14px 28px rgba(29, 78, 216, 0.2);
+  padding: 0.9rem 1.35rem;
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--accent) 24%, transparent);
 }
 
 .backButton:hover,
-.nextButton:hover,
-.submitButton:hover {
+.nextButton:hover {
   transform: translateY(-1px);
 }
 
 .backButton:disabled,
-.nextButton:disabled,
-.submitButton:disabled {
+.nextButton:disabled {
   opacity: 0.55;
   cursor: not-allowed;
   transform: none;
@@ -219,6 +232,23 @@
 }
 
 @media (max-width: 640px) {
+  .progressWrap {
+    padding-inline: 1.1rem;
+  }
+
+  .stepInfo {
+    padding-inline: 1.1rem;
+  }
+
+  .content {
+    min-height: 0;
+    padding: 1.6rem 1.1rem;
+  }
+
+  .options {
+    grid-template-columns: 1fr;
+  }
+
   .contactGrid {
     grid-template-columns: 1fr;
   }
@@ -226,11 +256,11 @@
   .actions {
     flex-direction: column-reverse;
     align-items: stretch;
+    padding: 1rem 1.1rem 1.2rem;
   }
 
   .backButton,
-  .nextButton,
-  .submitButton {
+  .nextButton {
     width: 100%;
   }
 }

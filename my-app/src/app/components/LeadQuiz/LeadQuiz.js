@@ -1,7 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import styles from "./LeadQuiz.module.css";
+
+const ugcOnlyNeed = "📱 UGC / SoMe content";
 
 const stepDefinitions = [
   {
@@ -81,13 +83,20 @@ export default function LeadQuiz() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const currentStep = stepDefinitions[stepIndex];
-  const progress = useMemo(() => ((stepIndex + 1) / stepDefinitions.length) * 100, [stepIndex]);
+  const visibleSteps = stepDefinitions.filter(
+    (step) => answers.need !== ugcOnlyNeed || !["scope", "hasWebsite"].includes(step.id)
+  );
+  const currentStep = visibleSteps[stepIndex];
+  const progress = ((stepIndex + 1) / visibleSteps.length) * 100;
   const isOptionStep = currentStep.type === "choice";
   const currentSelection = currentStep.id ? answers[currentStep.id] ?? "" : "";
 
   const updateAnswer = (field, value) => {
-    setAnswers((current) => ({ ...current, [field]: value }));
+    setAnswers((current) => ({
+      ...current,
+      [field]: value,
+      ...(field === "need" && value === ugcOnlyNeed ? { scope: "", hasWebsite: "" } : {}),
+    }));
     setStatus({ type: "", message: "" });
   };
 
@@ -110,7 +119,7 @@ export default function LeadQuiz() {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.message || "Kunne ikke sende dit forslag.");
+        throw new Error(result.message || "Kunne ikke sende din forespørgsel.");
       }
 
       setSubmitted(true);
@@ -148,7 +157,12 @@ export default function LeadQuiz() {
     }
   };
 
-  const showSubmitButton = stepIndex === stepDefinitions.length - 1 && !submitted;
+  const handleRestart = () => {
+    setStepIndex(0);
+    setAnswers(initialAnswers);
+    setStatus({ type: "", message: "" });
+    setSubmitted(false);
+  };
 
   return (
     <div className={styles.page}>
@@ -160,8 +174,8 @@ export default function LeadQuiz() {
         </div>
 
         <div className={styles.stepInfo}>
-          <span>Spørgsmål {Math.min(stepIndex + 1, stepDefinitions.length)}</span>
-          <span>{stepDefinitions.length} trin</span>
+          <span>Spørgsmål {Math.min(stepIndex + 1, visibleSteps.length)}</span>
+          <span>{visibleSteps.length} trin</span>
         </div>
 
         <div className={styles.content}>
@@ -178,7 +192,7 @@ export default function LeadQuiz() {
           {isOptionStep && currentStep.type !== "intro" ? (
             <div>
               <p className={styles.eyebrow}>{currentStep.label}</p>
-              <div className={styles.options}>
+              <div className={styles.options} role="group" aria-label={currentStep.label}>
                 {currentStep.options.map((option) => {
                   const selected = answers[currentStep.id] === option;
                   return (
@@ -186,6 +200,7 @@ export default function LeadQuiz() {
                       key={option}
                       type="button"
                       className={`${styles.optionButton} ${selected ? styles.optionButtonSelected : ""}`}
+                      aria-pressed={selected}
                       onClick={() => updateAnswer(currentStep.id, option)}
                     >
                       {option}
@@ -262,23 +277,33 @@ export default function LeadQuiz() {
         </div>
 
         <div className={styles.actions}>
-          <button type="button" className={styles.backButton} onClick={handleBack} disabled={stepIndex === 0 || isSubmitting}>
-            Tilbage
-          </button>
-
-          {showSubmitButton ? (
-            <button type="button" className={styles.nextButton} onClick={handleNext} disabled={isSubmitting}>
-              Næste
+          {submitted ? (
+            <button type="button" className={styles.nextButton} onClick={handleRestart}>
+              Gå tilbage til start
             </button>
           ) : (
-            <button
-              type="button"
-              className={styles.submitButton}
-              onClick={handleNext}
-              disabled={isSubmitting || submitted}
-            >
-              {isSubmitting ? "Sender..." : submitted ? "Sendt" : "Få mit forslag →"}
-            </button>
+            <>
+              <button
+                type="button"
+                className={styles.backButton}
+                onClick={handleBack}
+                disabled={stepIndex === 0 || isSubmitting}
+              >
+                Tilbage
+              </button>
+              <button
+                type="button"
+                className={styles.nextButton}
+                onClick={handleNext}
+                disabled={isSubmitting}
+              >
+                {isSubmitting
+                  ? "Sender..."
+                  : currentStep.type === "contact"
+                    ? "Send forespørgsel"
+                    : "Næste →"}
+              </button>
+            </>
           )}
         </div>
       </div>
