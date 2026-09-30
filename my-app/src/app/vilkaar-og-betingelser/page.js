@@ -57,8 +57,12 @@ export default function VilkaarPage() {
       <section className={styles.section}>
         <h2>6. Immaterielle rettigheder</h2>
         <p>
-          Ophavsret til leveret materiale overgår til kunden ved fuld betaling, medmindre andet er aftalt.
-          MRW Agency bevarer retten til generisk knowhow, metoder, skabeloner og tredjeparts-komponenter.
+          For leverancer, der ikke er UGC-indhold, overgår de aftalte rettigheder til det leverede materiale
+          til kunden ved fuld betaling, medmindre andet er aftalt. For UGC-indhold gælder særskilte
+          brugsretvilkår kun, hvis de udtrykkeligt er indarbejdet i og accepteret som en del af den konkrete
+          skriftlige aftale. I så fald har UGC-vilkårene forrang for UGC-indhold, hvor de konkret afviger
+          fra dette afsnit. MRW Agency bevarer retten til generisk knowhow, metoder og skabeloner, og
+          tredjepartsmateriale er altid underlagt rettighedshaverens licensvilkår.
         </p>
       </section>
 

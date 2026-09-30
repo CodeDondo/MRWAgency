@@ -25,6 +25,7 @@ const legalLinks = [
   { label: "Privatlivspolitik", href: "/privatlivspolitik" },
   { label: "Handelspolitik", href: "/handelspolitik" },
   { label: "Vilkår og betingelser", href: "/vilkaar-og-betingelser" },
+  { label: "Brugsret til UGC-indhold", href: "/brugsret-ugc" },
   { label: "Refusionspolitik", href: "/refusionspolitik" },
   { label: "Ansvarsfraskrivelse", href: "/ansvarsfraskrivelse" },
 ];
