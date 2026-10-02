@@ -69,7 +69,7 @@ export default function Footer() {
           </p>
           <div className={styles.contactInfo}>
             <a href="mailto:kontakt@mrwagency.dk">Email: kontakt@mrwagency.dk</a>
-            <a href="tel:+4530250344">Telefon: +45 30 25 03 44</a>
+            <a href="tel:+4536207540">Telefon: +45 36 20 75 40</a>
             <p>CVR: 44231662</p>
           </div>
           <div className={styles.socialLinks}>
