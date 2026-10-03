@@ -319,7 +319,7 @@
   justify-content: space-between;
   gap: 1.25rem;
   padding: 1.6rem;
-  background: linear-gradient(135deg, #ffffff 0%, #edf3ff 100%);
+  background: linear-gradient(135deg, var(--surface), var(--background));
   transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
 }
 
