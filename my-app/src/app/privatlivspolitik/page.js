@@ -17,7 +17,7 @@ export default function PrivatlivspolitikPage() {
           MRW Agency er dataansvarlig for behandlingen af personoplysninger, som vi modtager via vores
           hjemmeside og i forbindelse med kundeforhold.
         </p>
-        <p>Email: kontakt@mrwagency.dk · Telefon: +45 30 25 03 44 · CVR: 44231662</p>
+        <p>Email: kontakt@mrwagency.dk · Telefon: +45 36 20 75 40 · CVR: 44231662</p>
       </section>
 
       <section className={styles.section}>

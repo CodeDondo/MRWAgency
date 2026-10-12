@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import styles from "./LeadQuiz.module.css";
 
 const ugcOnlyNeed = "📱 UGC / SoMe content";
@@ -63,6 +64,60 @@ const stepDefinitions = [
   },
 ];
 
+const englishStepDefinitions = [
+  {
+    id: "intro",
+    type: "intro",
+    title: "Let's find the right solution for your business",
+    description: "It takes about 60 seconds.",
+  },
+  {
+    id: "businessType",
+    type: "choice",
+    label: "What type of business do you have?",
+    options: ["🧱 Tradesperson", "💇 Hair / Beauty", "🛍️ Retail", "💼 Consultant / B2B", "Other"],
+  },
+  {
+    id: "need",
+    type: "choice",
+    label: "What do you need?",
+    options: [
+      "🌐 New website",
+      "🔄 New website for an existing business",
+      "🛒 Online shop",
+      "📱 UGC / Social media content",
+      "🚀 Website + content",
+      "🤷 I'm not sure",
+    ],
+  },
+  {
+    id: "scope",
+    type: "choice",
+    label: "How complex should the website be?",
+    options: ["Minimal / basic", "Professional business website", "Online shop"],
+  },
+  {
+    id: "hasWebsite",
+    type: "choice",
+    label: "Do you already have a website?",
+    options: ["Yes", "No", "It needs an update"],
+  },
+  {
+    id: "budget",
+    type: "choice",
+    label: "What is your approximate budget?",
+    options: ["Under DKK 5,000", "DKK 5,000–10,000", "DKK 10,000–20,000", "DKK 20,000+", "Not sure yet"],
+  },
+  {
+    id: "contact",
+    type: "contact",
+    label: "Contact details",
+    description: "🎯 Great — we have an idea of what you're looking for.",
+  },
+];
+
+const englishUgcOnlyNeed = "📱 UGC / Social media content";
+
 const initialAnswers = {
   businessType: "",
   need: "",
@@ -77,14 +132,18 @@ const initialAnswers = {
 };
 
 export default function LeadQuiz() {
+  const pathname = usePathname();
+  const isEnglish = pathname === "/en" || pathname.startsWith("/en/");
+  const steps = isEnglish ? englishStepDefinitions : stepDefinitions;
+  const ugcNeed = isEnglish ? englishUgcOnlyNeed : ugcOnlyNeed;
   const [stepIndex, setStepIndex] = useState(0);
   const [answers, setAnswers] = useState(initialAnswers);
   const [status, setStatus] = useState({ type: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const visibleSteps = stepDefinitions.filter(
-    (step) => answers.need !== ugcOnlyNeed || !["scope", "hasWebsite"].includes(step.id)
+  const visibleSteps = steps.filter(
+    (step) => answers.need !== ugcNeed || !["scope", "hasWebsite"].includes(step.id)
   );
   const currentStep = visibleSteps[stepIndex];
   const progress = ((stepIndex + 1) / visibleSteps.length) * 100;
@@ -95,7 +154,7 @@ export default function LeadQuiz() {
     setAnswers((current) => ({
       ...current,
       [field]: value,
-      ...(field === "need" && value === ugcOnlyNeed ? { scope: "", hasWebsite: "" } : {}),
+      ...(field === "need" && value === ugcNeed ? { scope: "", hasWebsite: "" } : {}),
     }));
     setStatus({ type: "", message: "" });
   };
@@ -119,13 +178,22 @@ export default function LeadQuiz() {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.message || "Kunne ikke sende din forespørgsel.");
+        throw new Error(
+          isEnglish
+            ? "We couldn't send your request. Please try again later."
+            : result.message || "Kunne ikke sende din forespørgsel."
+        );
       }
 
       setSubmitted(true);
-      setStatus({ type: "success", message: result.message || "Tak! Vi har modtaget dit forslag." });
+      setStatus({
+        type: "success",
+        message: isEnglish
+          ? "Thank you! We've received your request."
+          : result.message || "Tak! Vi har modtaget dit forslag.",
+      });
     } catch (error) {
-      setStatus({ type: "error", message: error.message || "Der opstod en fejl. Prøv igen." });
+      setStatus({ type: "error", message: error.message || (isEnglish ? "Something went wrong. Please try again." : "Der opstod en fejl. Prøv igen.") });
     } finally {
       setIsSubmitting(false);
     }
@@ -133,13 +201,13 @@ export default function LeadQuiz() {
 
   const handleNext = () => {
     if (isOptionStep && !currentSelection) {
-      setStatus({ type: "error", message: "Vælg venligst et svar for at fortsætte." });
+      setStatus({ type: "error", message: isEnglish ? "Please choose an answer to continue." : "Vælg venligst et svar for at fortsætte." });
       return;
     }
 
     if (currentStep.type === "contact") {
       if (!answers.name || !answers.email) {
-        setStatus({ type: "error", message: "Udfyld venligst navn og email." });
+        setStatus({ type: "error", message: isEnglish ? "Please enter your name and email." : "Udfyld venligst navn og email." });
         return;
       }
       handleSubmit();
@@ -147,7 +215,7 @@ export default function LeadQuiz() {
     }
 
     setStatus({ type: "", message: "" });
-    setStepIndex((value) => Math.min(value + 1, stepDefinitions.length - 1));
+    setStepIndex((value) => Math.min(value + 1, visibleSteps.length - 1));
   };
 
   const handleBack = () => {
@@ -168,20 +236,20 @@ export default function LeadQuiz() {
     <div className={styles.page}>
       <div className={styles.card}>
         <div className={styles.progressWrap}>
-          <div className={styles.progressBar} aria-label="Fremskridt i spørgeskemaet">
+          <div className={styles.progressBar} aria-label={isEnglish ? "Questionnaire progress" : "Fremskridt i spørgeskemaet"}>
             <div className={styles.progressFill} style={{ width: `${progress}%` }} />
           </div>
         </div>
 
         <div className={styles.stepInfo}>
-          <span>Spørgsmål {Math.min(stepIndex + 1, visibleSteps.length)}</span>
-          <span>{visibleSteps.length} trin</span>
+          <span>{isEnglish ? "Question" : "Spørgsmål"} {Math.min(stepIndex + 1, visibleSteps.length)}</span>
+          <span>{visibleSteps.length} {isEnglish ? "steps" : "trin"}</span>
         </div>
 
         <div className={styles.content}>
           {currentStep.type === "intro" ? (
             <div className={styles.intro}>
-              <p className={styles.eyebrow}>Intro</p>
+              <p className={styles.eyebrow}>{isEnglish ? "Introduction" : "Intro"}</p>
               <h2 className={styles.title}>
                 <span className={styles.highlight}>👋</span> {currentStep.title}
               </h2>
@@ -218,7 +286,7 @@ export default function LeadQuiz() {
 
               <div className={styles.contactGrid}>
                 <div className={styles.field}>
-                  <label htmlFor="name">Navn</label>
+                  <label htmlFor="name">{isEnglish ? "Name" : "Navn"}</label>
                   <input
                     id="name"
                     type="text"
@@ -228,7 +296,7 @@ export default function LeadQuiz() {
                 </div>
 
                 <div className={styles.field}>
-                  <label htmlFor="company">Virksomhed</label>
+                  <label htmlFor="company">{isEnglish ? "Company" : "Virksomhed"}</label>
                   <input
                     id="company"
                     type="text"
@@ -248,7 +316,7 @@ export default function LeadQuiz() {
                 </div>
 
                 <div className={styles.field}>
-                  <label htmlFor="phone">Telefonnummer</label>
+                  <label htmlFor="phone">{isEnglish ? "Phone number" : "Telefonnummer"}</label>
                   <input
                     id="phone"
                     type="tel"
@@ -258,7 +326,7 @@ export default function LeadQuiz() {
                 </div>
 
                 <div className={`${styles.field} ${styles.fullWidth}`}>
-                  <label htmlFor="message">Eventuelt besked</label>
+                  <label htmlFor="message">{isEnglish ? "Additional message" : "Eventuelt besked"}</label>
                   <textarea
                     id="message"
                     value={answers.message}
@@ -279,7 +347,7 @@ export default function LeadQuiz() {
         <div className={styles.actions}>
           {submitted ? (
             <button type="button" className={styles.nextButton} onClick={handleRestart}>
-              Gå tilbage til start
+              {isEnglish ? "Start over" : "Gå tilbage til start"}
             </button>
           ) : (
             <>
@@ -289,7 +357,7 @@ export default function LeadQuiz() {
                 onClick={handleBack}
                 disabled={stepIndex === 0 || isSubmitting}
               >
-                Tilbage
+                {isEnglish ? "Back" : "Tilbage"}
               </button>
               <button
                 type="button"
@@ -298,10 +366,10 @@ export default function LeadQuiz() {
                 disabled={isSubmitting}
               >
                 {isSubmitting
-                  ? "Sender..."
+                  ? (isEnglish ? "Sending..." : "Sender...")
                   : currentStep.type === "contact"
-                    ? "Send forespørgsel"
-                    : "Næste →"}
+                    ? (isEnglish ? "Send enquiry" : "Send forespørgsel")
+                    : (isEnglish ? "Next →" : "Næste →")}
               </button>
             </>
           )}

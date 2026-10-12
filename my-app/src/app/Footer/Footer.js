@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import styles from "./Footer.module.css";
 
 const serviceLinks = [
@@ -52,11 +55,30 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
+  const isEnglish = pathname === "/en" || pathname.startsWith("/en/");
+  const englishLabels = {
+    "Webudvikling": "Web development",
+    "Vedligeholdelse": "Maintenance",
+    "Om os": "About",
+    "Priser": "Pricing",
+    "Book et møde": "Book a meeting",
+    "Kontakt": "Contact",
+    "Cookiepolitik": "Cookie policy",
+    "Privatlivspolitik": "Privacy policy",
+    "Handelspolitik": "Terms of sale",
+    "Vilkår og betingelser": "Terms and conditions",
+    "Brugsret til UGC-indhold": "UGC usage rights",
+    "Refusionspolitik": "Refund policy",
+    "Ansvarsfraskrivelse": "Disclaimer",
+  };
+  const internalHref = (href) => (isEnglish ? `/en${href}` : href);
+
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
         <section className={styles.brandBlock}>
-          <Link href="/" className={styles.logoLink}>
+          <Link href={internalHref("/")} className={styles.logoLink}>
             <Image
               src="/mrw_agency_logo_transparent.png"
               alt="MRW Agency logo"
@@ -65,11 +87,13 @@ export default function Footer() {
             />
           </Link>
           <p className={styles.brandText}>
-            Vi hjælper virksomheder med websites, digital vækst og kreativ SoMe content creation.
+            {isEnglish
+              ? "We help businesses with websites, digital growth and creative social media content."
+              : "Vi hjælper virksomheder med websites, digital vækst og kreativ SoMe content creation."}
           </p>
           <div className={styles.contactInfo}>
             <a href="mailto:kontakt@mrwagency.dk">Email: kontakt@mrwagency.dk</a>
-            <a href="tel:+4536207540">Telefon: +45 36 20 75 40</a>
+            <a href="tel:+4536207540">{isEnglish ? "Phone" : "Telefon"}: +45 36 20 75 40</a>
             <p>CVR: 44231662</p>
           </div>
           <div className={styles.socialLinks}>
@@ -90,33 +114,33 @@ export default function Footer() {
         </section>
 
         <section>
-          <h3 className={styles.title}>Ydelser</h3>
+          <h3 className={styles.title}>{isEnglish ? "Services" : "Ydelser"}</h3>
           <ul className={styles.linkList}>
             {serviceLinks.map((link) => (
               <li key={link.label}>
-                <Link href={link.href}>{link.label}</Link>
+                <Link href={internalHref(link.href)}>{isEnglish ? englishLabels[link.label] || link.label : link.label}</Link>
               </li>
             ))}
           </ul>
         </section>
 
         <section>
-          <h3 className={styles.title}>Firma</h3>
+          <h3 className={styles.title}>{isEnglish ? "Company" : "Firma"}</h3>
           <ul className={styles.linkList}>
             {companyLinks.map((link) => (
               <li key={link.label}>
-                <Link href={link.href}>{link.label}</Link>
+                <Link href={internalHref(link.href)}>{isEnglish ? englishLabels[link.label] || link.label : link.label}</Link>
               </li>
             ))}
           </ul>
         </section>
 
         <section>
-          <h3 className={styles.title}>Juridisk</h3>
+          <h3 className={styles.title}>{isEnglish ? "Legal" : "Juridisk"}</h3>
           <ul className={styles.linkList}>
             {legalLinks.map((link) => (
               <li key={link.label}>
-                <Link href={link.href}>{link.label}</Link>
+                <Link href={internalHref(link.href)}>{isEnglish ? englishLabels[link.label] || link.label : link.label}</Link>
               </li>
             ))}
           </ul>
@@ -124,7 +148,7 @@ export default function Footer() {
       </div>
 
       <div className={styles.bottomBar}>
-        <p>© {new Date().getFullYear()} MRW Agency. Alle rettigheder forbeholdes.</p>
+        <p>© {new Date().getFullYear()} MRW Agency. {isEnglish ? "All rights reserved." : "Alle rettigheder forbeholdes."}</p>
       </div>
     </footer>
   );

@@ -4,6 +4,7 @@ import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
 import CookieConsent from "./components/CookieConsent/CookieConsent";
 import ScrollToTopOnRoute from "./components/ScrollToTopOnRoute/ScrollToTopOnRoute";
+import LanguageAttribute from "./LanguageAttribute";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -88,6 +89,7 @@ export default function RootLayout({ children }) {
     <html lang="da">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ScrollToTopOnRoute />
+        <LanguageAttribute />
         <Navbar />
         <CookieConsent />
         {children}

@@ -3,19 +3,34 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import styles from "./Navbar.module.css";
-
-const navItems = [
-  { label: "Forside", href: "/" },
-  { label: "Priser", href: "/priser" },
-  { label: "Om os", href: "/om-os" },
-  { label: "Book et møde", href: "/book-et-moede" },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "Content creation", href: "/content-creation" },
-];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const isEnglish = pathname === "/en" || pathname.startsWith("/en/");
+  const navItems = isEnglish
+    ? [
+        { label: "Home", href: "/en" },
+        { label: "Pricing", href: "/en/priser" },
+        { label: "About", href: "/en/om-os" },
+        { label: "Book a meeting", href: "/en/book-et-moede" },
+        { label: "Portfolio", href: "/en/portfolio" },
+        { label: "Content creation", href: "/en/content-creation" },
+      ]
+    : [
+        { label: "Forside", href: "/" },
+        { label: "Priser", href: "/priser" },
+        { label: "Om os", href: "/om-os" },
+        { label: "Book et møde", href: "/book-et-moede" },
+        { label: "Portfolio", href: "/portfolio" },
+        { label: "Content creation", href: "/content-creation" },
+      ];
+  const currentPath = isEnglish ? pathname.replace(/^\/en(?=\/|$)/, "") || "/" : pathname;
+  const languageHref = isEnglish
+    ? currentPath
+    : `/en${pathname === "/" ? "" : pathname}`;
 
   useEffect(() => {
     const savedTheme = window.localStorage.getItem("theme");
@@ -32,8 +47,8 @@ export default function Navbar() {
 
   return (
     <header className={styles.header}>
-      <nav className={styles.navbar} aria-label="Primær navigation">
-        <Link href="/" scroll={false} className={styles.logoLink} onClick={() => setIsOpen(false)}>
+      <nav className={styles.navbar} aria-label={isEnglish ? "Main navigation" : "Primær navigation"}>
+        <Link href={isEnglish ? "/en" : "/"} scroll={false} className={styles.logoLink} onClick={() => setIsOpen(false)}>
           <Image
             src="/mrw_agency_logo_round.png"
             alt="MRW Agency logo"
@@ -48,7 +63,7 @@ export default function Navbar() {
           className={styles.menuButton}
           aria-expanded={isOpen}
           aria-controls="mobile-navigation"
-          aria-label={isOpen ? "Luk menu" : "Åbn menu"}
+          aria-label={isOpen ? (isEnglish ? "Close menu" : "Luk menu") : (isEnglish ? "Open menu" : "Åbn menu")}
           onClick={() => setIsOpen((open) => !open)}
         >
           <span />
@@ -66,12 +81,22 @@ export default function Navbar() {
           ))}
         </ul>
 
+        <Link
+          href={languageHref}
+          scroll={false}
+          className={styles.languageButton}
+          aria-label={isEnglish ? "Switch language to Danish" : "Switch language to English"}
+          onClick={() => setIsOpen(false)}
+        >
+          {isEnglish ? "DA" : "EN"}
+        </Link>
+
         <button
           type="button"
           className={styles.themeButton}
           onClick={toggleTheme}
-          aria-label="Skift mellem lyst og mørkt tema"
-          title="Skift mellem lyst og mørkt tema"
+          aria-label={isEnglish ? "Toggle light or dark theme" : "Skift mellem lyst og mørkt tema"}
+          title={isEnglish ? "Toggle light or dark theme" : "Skift mellem lyst og mørkt tema"}
         >
           <svg className={styles.sunIcon} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <circle cx="12" cy="12" r="4" />

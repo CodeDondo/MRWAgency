@@ -23,6 +23,7 @@ export default function sitemap() {
     { path: "/vilkaar-og-betingelser", changeFrequency: "yearly", priority: 0.4 },
     { path: "/refusionspolitik", changeFrequency: "yearly", priority: 0.4 },
     { path: "/ansvarsfraskrivelse", changeFrequency: "yearly", priority: 0.4 },
+    { path: "/brugsret-ugc", changeFrequency: "yearly", priority: 0.4 },
   ];
 
   const serviceSlugs = [
@@ -40,10 +41,27 @@ export default function sitemap() {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...serviceRoutes].map((route) => ({
-    url: `${baseUrl}${route.path}`,
-    lastModified: now,
-    changeFrequency: route.changeFrequency,
-    priority: route.priority,
-  }));
+  return [...staticRoutes, ...serviceRoutes].flatMap((route) => {
+    const danishUrl = `${baseUrl}${route.path}`;
+    const englishPath = `/en${route.path}`;
+    const englishUrl = `${baseUrl}${englishPath === "/en" ? "" : englishPath}`;
+    const languages = { da: danishUrl, en: englishUrl };
+
+    return [
+      {
+        url: danishUrl,
+        lastModified: now,
+        changeFrequency: route.changeFrequency,
+        priority: route.priority,
+        alternates: { languages },
+      },
+      {
+        url: englishUrl,
+        lastModified: now,
+        changeFrequency: route.changeFrequency,
+        priority: route.priority,
+        alternates: { languages },
+      },
+    ];
+  });
 }

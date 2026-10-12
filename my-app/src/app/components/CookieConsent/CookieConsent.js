@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import styles from "./CookieConsent.module.css";
 
 const STORAGE_KEY = "mrw_cookie_consent_v1";
@@ -119,14 +120,16 @@ const updateGoogleConsent = (statisticsGranted) => {
 };
 
 export default function CookieConsent() {
+  const pathname = usePathname();
+  const isEnglish = pathname === "/en" || pathname.startsWith("/en/");
   const [showBanner, setShowBanner] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [consent, setConsent] = useState(defaultConsent);
 
   const consentLabel = useMemo(() => {
-    if (consent.statistics) return "Statistik tilladt";
-    return "Kun nødvendige cookies";
-  }, [consent.statistics]);
+    if (consent.statistics) return isEnglish ? "Statistics enabled" : "Statistik tilladt";
+    return isEnglish ? "Necessary cookies only" : "Kun nødvendige cookies";
+  }, [consent.statistics, isEnglish]);
 
   useEffect(() => {
     ensureGtag();
@@ -187,52 +190,54 @@ export default function CookieConsent() {
   return (
     <>
       {showBanner ? (
-        <aside className={styles.banner} role="dialog" aria-live="polite" aria-label="Cookie samtykke">
+        <aside className={styles.banner} role="dialog" aria-live="polite" aria-label={isEnglish ? "Cookie consent" : "Cookie samtykke"}>
           <div className={styles.bannerText}>
-            <h2>Vi bruger cookies</h2>
+            <h2>{isEnglish ? "We use cookies" : "Vi bruger cookies"}</h2>
             <p>
-              Vi bruger nødvendige cookies for at siden fungerer, og statistikcookies (Google Analytics) kun
-              hvis du giver samtykke. Du kan altid ændre dit valg senere.
+              {isEnglish
+                ? "We use necessary cookies to make the website work, and statistics cookies (Google Analytics) only with your consent. You can change your choice at any time."
+                : "Vi bruger nødvendige cookies for at siden fungerer, og statistikcookies (Google Analytics) kun hvis du giver samtykke. Du kan altid ændre dit valg senere."}
             </p>
-            <Link href="/cookiepolitik">Læs cookiepolitik</Link>
+            <Link href={isEnglish ? "/en/cookiepolitik" : "/cookiepolitik"}>{isEnglish ? "Read cookie policy" : "Læs cookiepolitik"}</Link>
           </div>
 
           <div className={styles.bannerActions}>
             <button type="button" onClick={rejectOptional} className={styles.secondaryButton}>
-              Afvis valgfri
+              {isEnglish ? "Reject optional" : "Afvis valgfri"}
             </button>
             <button type="button" onClick={() => setShowSettings(true)} className={styles.secondaryButton}>
-              Tilpas
+              {isEnglish ? "Customise" : "Tilpas"}
             </button>
             <button type="button" onClick={acceptAll} className={styles.primaryButton}>
-              Accepter alle
+              {isEnglish ? "Accept all" : "Accepter alle"}
             </button>
           </div>
         </aside>
       ) : null}
 
       {showSettings ? (
-        <aside className={styles.settingsModal} role="dialog" aria-modal="true" aria-label="Cookie indstillinger">
+        <aside className={styles.settingsModal} role="dialog" aria-modal="true" aria-label={isEnglish ? "Cookie settings" : "Cookie indstillinger"}>
           <div className={styles.settingsCard}>
-            <h3>Cookie-indstillinger</h3>
+            <h3>{isEnglish ? "Cookie settings" : "Cookie-indstillinger"}</h3>
             <p>
-              Vælg hvilke cookies du vil tillade. Nødvendige cookies kan ikke fravælges, da de er påkrævede
-              for grundlæggende funktionalitet.
+              {isEnglish
+                ? "Choose which cookies to allow. Necessary cookies cannot be disabled because they are required for basic functionality."
+                : "Vælg hvilke cookies du vil tillade. Nødvendige cookies kan ikke fravælges, da de er påkrævede for grundlæggende funktionalitet."}
             </p>
 
             <div className={styles.optionList}>
               <label className={styles.optionItem}>
                 <div>
-                  <strong>Nødvendige cookies</strong>
-                  <span>Påkrævet for sikkerhed og basisfunktioner.</span>
+                  <strong>{isEnglish ? "Necessary cookies" : "Nødvendige cookies"}</strong>
+                  <span>{isEnglish ? "Required for security and basic functionality." : "Påkrævet for sikkerhed og basisfunktioner."}</span>
                 </div>
                 <input type="checkbox" checked disabled />
               </label>
 
               <label className={styles.optionItem}>
                 <div>
-                  <strong>Statistikcookies</strong>
-                  <span>Google Analytics (G-5SBEY45YVP) til anonymiseret besøgsstatistik.</span>
+                  <strong>{isEnglish ? "Statistics cookies" : "Statistikcookies"}</strong>
+                  <span>{isEnglish ? "Google Analytics (G-5SBEY45YVP) for anonymised visitor statistics." : "Google Analytics (G-5SBEY45YVP) til anonymiseret besøgsstatistik."}</span>
                 </div>
                 <input
                   type="checkbox"
@@ -248,8 +253,8 @@ export default function CookieConsent() {
 
               <label className={styles.optionItem}>
                 <div>
-                  <strong>Marketingcookies</strong>
-                  <span>Ikke i brug lige nu, men valget gemmes til fremtidig brug.</span>
+                  <strong>{isEnglish ? "Marketing cookies" : "Marketingcookies"}</strong>
+                  <span>{isEnglish ? "Not currently in use; your choice is saved for future use." : "Ikke i brug lige nu, men valget gemmes til fremtidig brug."}</span>
                 </div>
                 <input
                   type="checkbox"
@@ -266,10 +271,10 @@ export default function CookieConsent() {
 
             <div className={styles.settingsActions}>
               <button type="button" onClick={() => setShowSettings(false)} className={styles.secondaryButton}>
-                Luk
+                {isEnglish ? "Close" : "Luk"}
               </button>
               <button type="button" onClick={() => applyConsent(consent)} className={styles.primaryButton}>
-                Gem valg
+                {isEnglish ? "Save choices" : "Gem valg"}
               </button>
             </div>
           </div>
@@ -277,7 +282,7 @@ export default function CookieConsent() {
       ) : null}
 
       <button type="button" className={styles.reopenButton} onClick={() => setShowSettings(true)}>
-        Cookie-indstillinger · {consentLabel}
+        {isEnglish ? "Cookie settings" : "Cookie-indstillinger"} · {consentLabel}
       </button>
     </>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import styles from "./ContactForm.module.css";
 
 const initialFormData = {
@@ -17,6 +17,8 @@ const initialFormData = {
 
 export default function ContactForm() {
   const router = useRouter();
+  const pathname = usePathname();
+  const isEnglish = pathname === "/en" || pathname.startsWith("/en/");
   const [formData, setFormData] = useState(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState({ type: "", message: "" });
@@ -36,7 +38,9 @@ export default function ContactForm() {
     if (!formData.name || !formData.email || !formData.message || !formData.consent) {
       setStatus({
         type: "error",
-        message: "Udfyld venligst navn, email, besked og samtykke.",
+        message: isEnglish
+          ? "Please provide your name, email, message and consent."
+          : "Udfyld venligst navn, email, besked og samtykke.",
       });
       return;
     }
@@ -56,19 +60,23 @@ export default function ContactForm() {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.message || "Noget gik galt. Prøv igen.");
+        throw new Error(
+          isEnglish
+            ? "We couldn't send your message. Please try again later."
+            : result.message || "Noget gik galt. Prøv igen."
+        );
       }
 
       setStatus({
         type: "success",
-        message: result.message || "Tak for din besked. Vi vender tilbage hurtigst muligt.",
+        message: result.message || (isEnglish ? "Thank you for your message. We will be in touch soon." : "Tak for din besked. Vi vender tilbage hurtigst muligt."),
       });
       setFormData(initialFormData);
-      router.push("/tak-for-din-henvendelse");
+      router.push(isEnglish ? "/en/tak-for-din-henvendelse" : "/tak-for-din-henvendelse");
     } catch (error) {
       setStatus({
         type: "error",
-        message: error.message || "Kunne ikke sende formularen. Prøv igen senere.",
+        message: error.message || (isEnglish ? "Could not send the form. Please try again later." : "Kunne ikke sende formularen. Prøv igen senere."),
       });
     } finally {
       setIsSubmitting(false);
@@ -79,7 +87,7 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className={styles.form} noValidate>
       <div className={styles.grid}>
         <div className={styles.field}>
-          <label htmlFor="name">Navn *</label>
+          <label htmlFor="name">{isEnglish ? "Name" : "Navn"} *</label>
           <input id="name" name="name" type="text" value={formData.name} onChange={handleChange} required />
         </div>
 
@@ -96,32 +104,32 @@ export default function ContactForm() {
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="phone">Telefon</label>
+          <label htmlFor="phone">{isEnglish ? "Phone" : "Telefon"}</label>
           <input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} />
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="company">Virksomhed</label>
+          <label htmlFor="company">{isEnglish ? "Company" : "Virksomhed"}</label>
           <input id="company" name="company" type="text" value={formData.company} onChange={handleChange} />
         </div>
       </div>
 
       <div className={styles.field}>
-        <label htmlFor="service">Hvad ønsker du hjælp til?</label>
+        <label htmlFor="service">{isEnglish ? "What do you need help with?" : "Hvad ønsker du hjælp til?"}</label>
         <select id="service" name="service" value={formData.service} onChange={handleChange}>
-          <option value="">Vælg en ydelse</option>
+          <option value="">{isEnglish ? "Choose a service" : "Vælg en ydelse"}</option>
           <option value="Webdesign">Webdesign</option>
-          <option value="Webudvikling">Webudvikling</option>
+          <option value="Webudvikling">{isEnglish ? "Web development" : "Webudvikling"}</option>
           <option value="SEO">SEO</option>
           <option value="SoMe content creation">SoMe content creation</option>
           <option value="Branding">Branding</option>
-          <option value="Vedligeholdelse">Vedligeholdelse</option>
-          <option value="Andet">Andet</option>
+          <option value="Vedligeholdelse">{isEnglish ? "Maintenance" : "Vedligeholdelse"}</option>
+          <option value="Andet">{isEnglish ? "Other" : "Andet"}</option>
         </select>
       </div>
 
       <div className={styles.field}>
-        <label htmlFor="message">Besked *</label>
+        <label htmlFor="message">{isEnglish ? "Message" : "Besked"} *</label>
         <textarea
           id="message"
           name="message"
@@ -129,7 +137,7 @@ export default function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           required
-          placeholder="Fortæl kort om dit projekt, mål og ønsket tidsplan"
+          placeholder={isEnglish ? "Briefly describe your project, goals and desired timeline" : "Fortæl kort om dit projekt, mål og ønsket tidsplan"}
         />
       </div>
 
@@ -152,11 +160,11 @@ export default function ContactForm() {
           onChange={handleChange}
           required
         />
-        <span>Jeg accepterer, at MRW Agency må kontakte mig angående min henvendelse.</span>
+        <span>{isEnglish ? "I agree that MRW Agency may contact me about my enquiry." : "Jeg accepterer, at MRW Agency må kontakte mig angående min henvendelse."}</span>
       </label>
 
       <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
-        {isSubmitting ? "Sender..." : "Send henvendelse"}
+        {isSubmitting ? (isEnglish ? "Sending..." : "Sender...") : (isEnglish ? "Send enquiry" : "Send henvendelse")}
       </button>
 
       {status.message ? (
