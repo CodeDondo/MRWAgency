@@ -1,10 +1,12 @@
 import styles from "../legal.module.css";
 import ContactForm from "../components/ContactForm/ContactForm";
+import { createPageMetadata } from "../seo";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Book et møde",
   description: "Book et uforpligtende møde med MRW Agency.",
-};
+  path: "/book-et-moede",
+});
 
 export default function BookMoedePage() {
   return (

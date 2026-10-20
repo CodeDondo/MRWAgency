@@ -1,10 +1,12 @@
 import styles from "../legal.module.css";
 import ContactForm from "../components/ContactForm/ContactForm";
+import { createPageMetadata } from "../seo";
 
-export const metadata = {
-  title: "Kontakt | MRW Agency",
+export const metadata = createPageMetadata({
+  title: "Kontakt",
   description: "Kontakt MRW Agency via email eller telefon.",
-};
+  path: "/kontakt",
+});
 
 export default function KontaktPage() {
   return (

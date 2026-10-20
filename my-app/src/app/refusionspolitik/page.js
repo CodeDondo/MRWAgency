@@ -1,9 +1,11 @@
 import styles from "../legal.module.css";
+import { createPageMetadata } from "../seo";
 
-export const metadata = {
-  title: "Refusionspolitik | MRW Agency",
+export const metadata = createPageMetadata({
+  title: "Refusionspolitik",
   description: "Regler for afbestilling og refusion hos MRW Agency.",
-};
+  path: "/refusionspolitik",
+});
 
 export default function RefusionspolitikPage() {
   return (

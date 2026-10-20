@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./priser.module.css";
+import { createPageMetadata } from "../seo";
 
 const packages = [
   {
@@ -87,10 +88,11 @@ const maintenancePlans = [
   },
 ];
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Priser",
   description: "Priser på websites, SoMe content, add-ons og vedligeholdelse hos MRW Agency.",
-};
+  path: "/priser",
+});
 
 export default function PriserPage() {
   return (

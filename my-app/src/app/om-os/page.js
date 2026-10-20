@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./om-os.module.css";
+import { createPageMetadata } from "../seo";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Om os",
   description: "Mød personen bag MRW Agency og læs om erfaring, tilgang og udviklingen fra service til webløsninger.",
-};
+  path: "/om-os",
+});
 
 const birthDate = new Date("1996-01-18T00:00:00");
 const today = new Date();

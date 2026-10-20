@@ -2,6 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./service.module.css";
+import { createPageMetadata } from "../../seo";
+import StructuredData from "../../StructuredData";
+
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.mrwagency.dk").replace(/\/+$/, "");
 
 const serviceContent = {
   webdesign: {
@@ -123,18 +127,14 @@ export async function generateMetadata({ params }) {
   const service = serviceContent[slug];
 
   if (!service) {
-    return {
-      title: "Ydelse ikke fundet | MRW Agency",
-    };
+    return { title: "Ydelse ikke fundet | MRW Agency" };
   }
 
-  return {
-    title: `${service.title} | MRW Agency`,
+  return createPageMetadata({
+    title: service.title,
     description: service.description,
-    alternates: {
-      canonical: `/services/${slug}`,
-    },
-  };
+    path: `/services/${slug}`,
+  });
 }
 
 export default async function ServicePage({ params }) {
@@ -147,6 +147,18 @@ export default async function ServicePage({ params }) {
 
   return (
     <main className={styles.wrapper}>
+      <StructuredData
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: service.title,
+          serviceType: service.title,
+          description: service.description,
+          url: `${siteUrl}/services/${slug}`,
+          provider: { "@id": `${siteUrl}/#organization` },
+          areaServed: { "@type": "Country", name: "Danmark" },
+        }}
+      />
       <section className={styles.hero}>
         <div className={styles.heroText}>
           <p className={styles.kicker}>Ydelse</p>

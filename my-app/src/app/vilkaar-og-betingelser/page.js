@@ -1,9 +1,11 @@
 import styles from "../legal.module.css";
+import { createPageMetadata } from "../seo";
 
-export const metadata = {
-  title: "Vilkår og betingelser | MRW Agency",
+export const metadata = createPageMetadata({
+  title: "Vilkår og betingelser",
   description: "Generelle vilkår for køb af ydelser hos MRW Agency.",
-};
+  path: "/vilkaar-og-betingelser",
+});
 
 export default function VilkaarPage() {
   return (

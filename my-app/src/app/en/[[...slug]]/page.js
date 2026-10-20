@@ -10,6 +10,7 @@ import portfolioStyles from "../../portfolio/portfolio.module.css";
 import pricingStyles from "../../priser/priser.module.css";
 import contentStyles from "../../content-creation/content-creation.module.css";
 import serviceStyles from "../../services/[slug]/service.module.css";
+import { createPageMetadata } from "../../seo";
 
 const services = {
   webdesign: {
@@ -173,9 +174,8 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug = [] } = await params;
   const path = slug.join("/");
-  const title = path.startsWith("services/")
-    ? services[path.slice("services/".length)]?.title
-    : legalPages[path]?.title || ({
+  const service = path.startsWith("services/") ? services[path.slice("services/".length)] : null;
+  const title = service?.title || legalPages[path]?.title || ({
         "": "Web design, websites and content creation",
         priser: "Pricing",
         "om-os": "About",
@@ -188,10 +188,26 @@ export async function generateMetadata({ params }) {
         "tak-for-din-henvendelse": "Thank you for your enquiry",
       })[path];
   if (!title) return {};
-  return {
-    title,
-    alternates: { canonical: `/en${path ? `/${path}` : ""}` },
+  const descriptions = {
+    "": "Web design, development, SEO and content creation for businesses that want a stronger online presence.",
+    priser: "Explore website, social media content and maintenance packages from MRW Agency.",
+    "om-os": "Meet Morten and learn about MRW Agency's approach to web design and digital solutions.",
+    "book-et-moede": "Book an introductory meeting with MRW Agency to discuss your website or content project.",
+    portfolio: "Explore selected websites and content projects created by MRW Agency.",
+    "content-creation": "UGC and organic content solutions for businesses that want to build visibility and trust.",
+    faq: "Answers to common questions about MRW Agency's services, process and collaboration.",
+    kontakt: "Contact MRW Agency by email or phone to discuss your project.",
+    sporgeskema: "Tell us about your business and needs to receive a tailored digital project proposal.",
   };
+
+  return createPageMetadata({
+    title,
+    description:
+      service?.description || descriptions[path] || `Information about ${title.toLowerCase()} at MRW Agency.`,
+    path: `/en${path ? `/${path}` : ""}`,
+    locale: "en_US",
+    noIndex: path === "tak-for-din-henvendelse",
+  });
 }
 
 function Heading({ eyebrow, title, children }) {

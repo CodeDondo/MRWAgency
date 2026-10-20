@@ -1,0 +1,31 @@
+# MRW Agency
+
+> MRW Agency is a Danish digital agency run by Morten R. Winther. It helps small and medium-sized businesses with websites, branding, SEO, and social media content.
+
+The website is available in Danish and English. Danish pages are the primary source for information about services and prices. Use the published page as the source of truth and do not infer guarantees, availability, or results that are not stated there.
+
+## Main pages
+
+- [Home](https://www.mrwagency.dk/): Overview of MRW Agency and its services.
+- [About](https://www.mrwagency.dk/om-os): Background and approach of the founder.
+- [Services](https://www.mrwagency.dk/services/webdesign): Web design, web development, SEO, social media content creation, branding, and website maintenance.
+- [Content creation](https://www.mrwagency.dk/content-creation): UGC and organic content services.
+- [Portfolio](https://www.mrwagency.dk/portfolio): Selected website and content projects.
+- [Prices](https://www.mrwagency.dk/priser): Published package prices and service options.
+- [FAQ](https://www.mrwagency.dk/faq): Answers about services, process, pricing, timelines, and collaboration.
+- [Contact](https://www.mrwagency.dk/kontakt): Email kontakt@mrwagency.dk and phone +45 30 25 03 44.
+- [Book a meeting](https://www.mrwagency.dk/book-et-moede): Contact form to discuss a project.
+
+## Service pages
+
+- [Web design](https://www.mrwagency.dk/services/webdesign)
+- [Web development](https://www.mrwagency.dk/services/webudvikling)
+- [SEO](https://www.mrwagency.dk/services/seo)
+- [Social media content creation](https://www.mrwagency.dk/services/some-content-creation)
+- [Branding](https://www.mrwagency.dk/services/branding)
+- [Website maintenance](https://www.mrwagency.dk/services/vedligeholdelse)
+
+## Site information
+
+- [Sitemap](https://www.mrwagency.dk/sitemap.xml)
+- [Robots policy](https://www.mrwagency.dk/robots.txt)

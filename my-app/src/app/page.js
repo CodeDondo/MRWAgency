@@ -2,24 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import LeadQuiz from "./components/LeadQuiz/LeadQuiz";
 import styles from "./page.module.css";
+import { createPageMetadata } from "./seo";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Webdesign, websites og content creation",
   description:
     "MRW Agency bygger professionelle websites og hjælper virksomheder med branding, SEO og SoMe content creation.",
-  keywords: [
-    "webdesign",
-    "website",
-    "webbureau",
-    "content creation",
-    "SEO",
-    "SoMe content",
-    "MRW Agency",
-  ],
-  alternates: {
-    canonical: "/",
-  },
-};
+  path: "/",
+});
 
 const partnerBrands = [
   {

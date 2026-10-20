@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./portfolio.module.css";
+import { createPageMetadata } from "../seo";
 
 const websiteProjects = [
   {
@@ -30,10 +31,11 @@ const ugcProject = {
   summary: "Udvalgt UGC-indhold med naturlig, stærk og autentisk storytelling til sociale medier og brandarbejde.",
 };
 
-export const metadata = {
-  title: "Portfolio | MRW Agency",
+export const metadata = createPageMetadata({
+  title: "Portfolio",
   description: "Udvalgte websites bygget af MRW Agency med fokus på design, performance og konvertering.",
-};
+  path: "/portfolio",
+});
 
 export default function PortfolioPage() {
   return (

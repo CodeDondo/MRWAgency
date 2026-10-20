@@ -1,10 +1,13 @@
 import Link from "next/link";
 import styles from "../legal.module.css";
+import { createPageMetadata } from "../seo";
 
-export const metadata = {
-  title: "Tak for din henvendelse | MRW Agency",
+export const metadata = createPageMetadata({
+  title: "Tak for din henvendelse",
   description: "Din besked er modtaget, og vi vender hurtigt tilbage.",
-};
+  path: "/tak-for-din-henvendelse",
+  noIndex: true,
+});
 
 export default function ThankYouPage() {
   return (

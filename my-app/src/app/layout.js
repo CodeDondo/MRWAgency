@@ -5,6 +5,9 @@ import Footer from "./Footer/Footer";
 import CookieConsent from "./components/CookieConsent/CookieConsent";
 import ScrollToTopOnRoute from "./components/ScrollToTopOnRoute/ScrollToTopOnRoute";
 import LanguageAttribute from "./LanguageAttribute";
+import StructuredData from "./StructuredData";
+
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.mrwagency.dk").replace(/\/+$/, "");
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,7 +20,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://www.mrwagency.dk"),
+  metadataBase: new URL(`${siteUrl}/`),
   title: {
     default: "MRW Agency | Webdesign, websites og content creation",
     template: "%s | MRW Agency",
@@ -46,10 +49,10 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "/webhero.jpg",
-        width: 1200,
-        height: 630,
-        alt: "MRW Agency hero billede",
+        url: "/heroBanner.png",
+        width: 1672,
+        height: 941,
+        alt: "MRW Agency — websites, UGC og content",
       },
     ],
   },
@@ -58,15 +61,12 @@ export const metadata = {
     title: "MRW Agency | Webdesign, websites og content creation",
     description:
       "Professionelle websites, branding og content creation til virksomheder, der vil stå stærkere digitalt.",
-    images: ["/webhero.jpg"],
+    images: ["/heroBanner.png"],
   },
   icons: {
     icon: "/mrw_agency_logo_round.png",
     shortcut: "/mrw_agency_logo_round.png",
     apple: "/mrw_agency_logo_round.png",
-  },
-  alternates: {
-    canonical: "https://www.mrwagency.dk",
   },
   robots: {
     index: true,
@@ -84,10 +84,43 @@ export const metadata = {
   },
 };
 
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${siteUrl}/#organization`,
+    name: "MRW Agency",
+    url: `${siteUrl}/`,
+    logo: `${siteUrl}/mrw_agency_logo_transparent.png`,
+    description: metadata.description,
+    email: "kontakt@mrwagency.dk",
+    telephone: "+45 30 25 03 44",
+    founder: {
+      "@type": "Person",
+      name: "Morten R. Winther",
+    },
+    areaServed: {
+      "@type": "Country",
+      name: "Danmark",
+    },
+    knowsAbout: ["Webdesign", "Webudvikling", "SEO", "Branding", "Content creation"],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${siteUrl}/#website`,
+    name: "MRW Agency",
+    url: `${siteUrl}/`,
+    inLanguage: ["da-DK", "en"],
+    publisher: { "@id": `${siteUrl}/#organization` },
+  },
+];
+
 export default function RootLayout({ children }) {
   return (
     <html lang="da">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <StructuredData data={structuredData} />
         <ScrollToTopOnRoute />
         <LanguageAttribute />
         <Navbar />

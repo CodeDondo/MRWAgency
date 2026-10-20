@@ -1,9 +1,11 @@
 import styles from "../legal.module.css";
+import { createPageMetadata } from "../seo";
 
-export const metadata = {
-  title: "Ansvarsfraskrivelse | MRW Agency",
+export const metadata = createPageMetadata({
+  title: "Ansvarsfraskrivelse",
   description: "Ansvarsfraskrivelse for indhold og rådgivning fra MRW Agency.",
-};
+  path: "/ansvarsfraskrivelse",
+});
 
 export default function AnsvarsfraskrivelsePage() {
   return (

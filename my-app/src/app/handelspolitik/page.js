@@ -1,9 +1,11 @@
 import styles from "../legal.module.css";
+import { createPageMetadata } from "../seo";
 
-export const metadata = {
-  title: "Handelspolitik | MRW Agency",
+export const metadata = createPageMetadata({
+  title: "Handelspolitik",
   description: "Handelspolitik for køb af digitale ydelser hos MRW Agency.",
-};
+  path: "/handelspolitik",
+});
 
 export default function HandelspolitikPage() {
   return (

@@ -1,9 +1,11 @@
 import styles from "../legal.module.css";
+import { createPageMetadata } from "../seo";
 
-export const metadata = {
-  title: "Cookiepolitik | MRW Agency",
+export const metadata = createPageMetadata({
+  title: "Cookiepolitik",
   description: "Information om brug af cookies og samtykke på MRW Agency.",
-};
+  path: "/cookiepolitik",
+});
 
 export default function CookiepolitikPage() {
   return (

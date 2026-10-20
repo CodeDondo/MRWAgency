@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./content-creation.module.css";
+import { createPageMetadata } from "../seo";
 
 const valuePoints = [
   {
@@ -56,11 +57,12 @@ const examples = [
   "Et mere struktureret og konsekvent indholdsfokus, der kan bygges videre på",
 ];
 
-export const metadata = {
-  title: "UGC og organisk content | MRW Agency",
+export const metadata = createPageMetadata({
+  title: "UGC og organisk content",
   description:
     "UGC, organisk markedsføring og content-løsninger til virksomheder, der vil være mere personlige og mindre afhængige af betalte leads.",
-};
+  path: "/content-creation",
+});
 
 export default function ContentCreationPage() {
   return (

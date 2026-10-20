@@ -1,9 +1,11 @@
 import styles from "../legal.module.css";
+import { createPageMetadata } from "../seo";
 
-export const metadata = {
-  title: "Privatlivspolitik | MRW Agency",
+export const metadata = createPageMetadata({
+  title: "Privatlivspolitik",
   description: "Information om behandling af personoplysninger hos MRW Agency.",
-};
+  path: "/privatlivspolitik",
+});
 
 export default function PrivatlivspolitikPage() {
   return (

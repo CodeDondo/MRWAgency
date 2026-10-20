@@ -1,10 +1,11 @@
 import styles from "../legal.module.css";
+import { createPageMetadata } from "../seo";
 
-export const metadata = {
-  title: "Brugsret til UGC-indhold | MRW Agency",
-  description:
-    "Vilkår for brug, annoncering og fremvisning af UGC-indhold produceret af MRW Agency.",
-};
+export const metadata = createPageMetadata({
+  title: "Brugsret til UGC-indhold",
+  description: "Vilkår for brug, annoncering og fremvisning af UGC-indhold produceret af MRW Agency.",
+  path: "/brugsret-ugc",
+});
 
 export default function BrugsretUgcPage() {
   return (
