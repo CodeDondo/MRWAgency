@@ -6,6 +6,7 @@ import CookieConsent from "./components/CookieConsent/CookieConsent";
 import ScrollToTopOnRoute from "./components/ScrollToTopOnRoute/ScrollToTopOnRoute";
 import LanguageAttribute from "./LanguageAttribute";
 import StructuredData from "./StructuredData";
+import ClickTracker from "./components/ClickTracker/ClickTracker";
 
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.mrwagency.dk").replace(/\/+$/, "");
 
@@ -125,6 +126,7 @@ export default function RootLayout({ children }) {
         <LanguageAttribute />
         <Navbar />
         <CookieConsent />
+        <ClickTracker />
         {children}
         <Footer />
       </body>

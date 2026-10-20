@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import styles from "./ContactForm.module.css";
+import { trackEvent } from "../../lib/track";
 
 const initialFormData = {
   name: "",
@@ -71,9 +72,11 @@ export default function ContactForm() {
         type: "success",
         message: result.message || (isEnglish ? "Thank you for your message. We will be in touch soon." : "Tak for din besked. Vi vender tilbage hurtigst muligt."),
       });
+      trackEvent("generate_lead", { form_name: "contact", service: formData.service || "ikke_valgt" });
       setFormData(initialFormData);
       router.push(isEnglish ? "/en/tak-for-din-henvendelse" : "/tak-for-din-henvendelse");
     } catch (error) {
+      trackEvent("form_error", { form_name: "contact" });
       setStatus({
         type: "error",
         message: error.message || (isEnglish ? "Could not send the form. Please try again later." : "Kunne ikke sende formularen. Prøv igen senere."),

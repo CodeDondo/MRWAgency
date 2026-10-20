@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { trackEvent } from "../../lib/track";
 import styles from "./LeadQuiz.module.css";
 
 const ugcOnlyNeed = "📱 UGC / SoMe content";
@@ -185,6 +186,12 @@ export default function LeadQuiz() {
         );
       }
 
+      trackEvent("generate_lead", {
+        form_name: "quiz",
+        business_type: answers.businessType,
+        need: answers.need,
+        budget: answers.budget,
+      });
       setSubmitted(true);
       setStatus({
         type: "success",
@@ -214,6 +221,11 @@ export default function LeadQuiz() {
       return;
     }
 
+    trackEvent("quiz_step", {
+      step_id: currentStep.id,
+      step_number: stepIndex + 1,
+      answer: currentSelection || undefined,
+    });
     setStatus({ type: "", message: "" });
     setStepIndex((value) => Math.min(value + 1, visibleSteps.length - 1));
   };
